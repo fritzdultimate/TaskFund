@@ -5,6 +5,8 @@ use App\Livewire\Auth\AccountDetailsConfirmation;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Registration;
 use App\Livewire\Dashboard\Home;
+use App\Livewire\Dashboard\Level;
+use App\Livewire\Dashboard\Tasks;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,4 +30,6 @@ Route::get('/register/details/confirmation', AccountDetailsConfirmation::class)-
 Route::get('/register/details/confirmed', AccountCreated::class)->name('details-confirmed');
 
 Route::get('/app/dashboard', Home::class)->name('dashboard');
+Route::get('/app/tasks', Tasks::class)->name('tasks');
+Route::get('/app/level', Level::class)->name('level');
 
