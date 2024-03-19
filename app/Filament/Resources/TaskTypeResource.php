@@ -6,9 +6,12 @@ use App\Filament\Resources\TaskTypeResource\Pages;
 use App\Filament\Resources\TaskTypeResource\RelationManagers;
 use App\Models\TaskType;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -23,7 +26,14 @@ class TaskTypeResource extends Resource
     {
         return $form
             ->schema([
-                //
+                TextInput::make('name'),
+                Select::make('is_active')
+                ->label('is Active?')
+                    ->options([
+                        0 => 'No',
+                        1 => 'Yes'
+                    ])
+                    ->default(1),
             ]);
     }
 
@@ -31,7 +41,8 @@ class TaskTypeResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('name'),
+                TextColumn::make('is_active'),
             ])
             ->filters([
                 //
