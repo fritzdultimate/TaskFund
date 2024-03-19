@@ -6,9 +6,13 @@ use App\Filament\Resources\LevelResource\Pages;
 use App\Filament\Resources\LevelResource\RelationManagers;
 use App\Models\Level;
 use Filament\Forms;
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -23,7 +27,20 @@ class LevelResource extends Resource
     {
         return $form
             ->schema([
-                //
+                TextInput::make('name'),
+                TextInput::make('capital'),
+                TextInput::make('welcome_bonus'),
+                TextInput::make('daily_tasks'),
+                TextInput::make('profit_per_task'),
+                Select::make('is_automated')
+                ->label('is Automated?')
+                    ->options([
+                        0 => 'No',
+                        1 => 'Yes'
+                    ])
+                    ->default(1)
+                // Checkbox::make('is_automated')
+                //     ->label('is Automated?'),
             ]);
     }
 
@@ -31,7 +48,12 @@ class LevelResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('name'),
+                TextColumn::make('capital'),
+                TextColumn::make('welcome_bonus'),
+                TextColumn::make('daily_tasks'),
+                TextColumn::make('profit_per_task'),
+                TextColumn::make('is_automated'),
             ])
             ->filters([
                 //

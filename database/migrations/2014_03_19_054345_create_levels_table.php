@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->decimal('capital');
-            $table->decimal('welcome_bonus')
-                ->comment('cashback');
+            $table->decimal('welcome_bonus');
             $table->tinyInteger('daily_tasks');
             $table->string('profit_per_task');
             $table->boolean('is_automated')->default(false);
