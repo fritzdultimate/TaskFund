@@ -17,7 +17,12 @@ class LevelFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->name(),
+            'capital' => fake()->numberBetween(100, 100000),
+            'welcome_bonus' => fake()->numberBetween(100, 100000),
+            'daily_tasks' => fake()->numberBetween(5, 100),
+            'profit_per_task' =>fake()->numberBetween(100, 100000),
+            'is_automated' => false,
         ];
     }
 }

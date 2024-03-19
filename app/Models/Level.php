@@ -17,4 +17,9 @@ class Level extends Model
         'profit_per_task',
         'is_automated',
     ];
+
+    protected $casts = [
+        'is_automated' => 'boolean',
+    ];
+
 }
