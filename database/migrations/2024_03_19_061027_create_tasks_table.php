@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('task_type_id')->constrained('task_id')->cascadeOnDelete();
+            $table->string('link');
+            $table->text('instructions')->nullable();
             $table->timestamps();
         });
     }
