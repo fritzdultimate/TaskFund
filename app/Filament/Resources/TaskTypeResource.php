@@ -6,6 +6,7 @@ use App\Filament\Resources\TaskTypeResource\Pages;
 use App\Filament\Resources\TaskTypeResource\RelationManagers;
 use App\Models\TaskType;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -26,6 +27,7 @@ class TaskTypeResource extends Resource
     {
         return $form
             ->schema([
+                FileUpload::make('image')->columnSpanFull(),
                 TextInput::make('name'),
                 Select::make('is_active')
                 ->label('is Active?')
