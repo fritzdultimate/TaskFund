@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Auth;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Rule;
@@ -12,27 +14,22 @@ use Livewire\Component;
 #[Title('Login to start investing')]
 class Login extends Component {
     #[Rule('required|email')] 
-    public $email = '';
-
+    public $login = '';
     public $password = '';
-    public $showPasswordField = false;
     public $errorMsg = '';
 
-    public $otpErrMsg = '';
-    
-    public $twoFac = false;
-    public $accountVerified = true;
-    public $newDevice = false;
-    public $otp = '';
-
-    public function sendRequest($url, $method, $data) {
-        $request = Request::create($url, $method, $data);
-        $response = app()->handle($request);
-        return json_decode($response->getContent());
-    }
-
-    public function viewEmailField() {
-        $this->showPasswordField = false;
+    public function submit() {
+        $user = User::where('email', $this->login)->orWhere('username', $this->login)->first();
+        if($user) {
+            if(!password_verify($this->password, $user->password)) {
+                $this->errorMsg = 'Wrong details entered.';
+            } else {
+                Auth::login($user);
+                $this->dispatch('login-s', 'Login was successful');
+            }
+        } else {
+            $this->errorMsg = 'Wrong details entered.';
+        }
     }
 
     public function render() {
