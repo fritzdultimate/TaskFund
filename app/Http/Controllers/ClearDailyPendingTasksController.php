@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ClearDailyPendingTasks extends Controller
+class ClearDailyPendingTasksController extends Controller
 {
     /**
      * Handle the incoming request.
