@@ -11,6 +11,6 @@ class ClearDailyPendingTasksController extends Controller
      */
     public function __invoke(Request $request)
     {
-        //
+        $pendingTasks = TaskHall::with('user')->where('status', 'pending');
     }
 }
