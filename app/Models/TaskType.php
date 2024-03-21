@@ -14,4 +14,9 @@ class TaskType extends Model
         'image',
         'is_active',
     ];
+
+
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
 }

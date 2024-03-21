@@ -3,18 +3,18 @@
 return [
     [
         'name' => 'Facebook',
-        'image' => '/imgs/icon/facebook.png'
+        'image' => '/img/icons/facebook.png'
     ],
     [
         'name' => 'Whatsapp',
-        'image' => '/imgs/icon/whatsapp.png'
+        'image' => '/img/icons/whatsapp.png'
     ],
     [
         'name' => 'Instagram',
-        'image' => '/imgs/icon/instagram.png'
+        'image' => '/img/icons/instagram.png'
     ],
     [
         'name' => 'Youtube',
-        'image' => '/imgs/icon/youtube.png'
+        'image' => '/img/icons/youtube.png'
     ],
 ];
