@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\TaskStatus;
+use App\Models\TaskHall;
 use Illuminate\Http\Request;
 
 class ClearDailyPendingTasksController extends Controller
@@ -11,6 +13,12 @@ class ClearDailyPendingTasksController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $pendingTasks = TaskHall::with('user')->where('status', 'pending');
+
+        TaskHall::with('user')
+            ->where('status', TaskStatus::PENDING->value)
+            ->where('created_at', '<=', now()->subDay())
+            ->lazyById(200, $column = 'id')
+            ->each
+            ->delete();
     }
 }
