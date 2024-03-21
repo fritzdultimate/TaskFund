@@ -12,6 +12,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -49,11 +50,15 @@ class LevelResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name'),
-                TextColumn::make('capital'),
-                TextColumn::make('welcome_bonus'),
+                TextColumn::make('capital')
+                ->money('NGN'),
+                TextColumn::make('welcome_bonus')
+                ->money('NGN'),
                 TextColumn::make('daily_tasks'),
-                TextColumn::make('profit_per_task'),
-                TextColumn::make('is_automated'),
+                TextColumn::make('profit_per_task')
+                ->money('NGN'),
+                IconColumn::make('is_automated')
+                ->boolean(),
             ])
             ->filters([
                 //

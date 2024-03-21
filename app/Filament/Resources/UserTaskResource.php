@@ -17,6 +17,10 @@ class UserTaskResource extends Resource
 {
     protected static ?string $model = UserTask::class;
 
+
+    protected static ?string $navigationLabel = 'Submitted Tasks';
+
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
