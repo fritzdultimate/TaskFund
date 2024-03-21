@@ -2,8 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\UserTaskResource\Pages;
+use App\Filament\Resources\TaskHallResource\Pages;
 use App\Filament\Resources\UserTaskResource\RelationManagers;
+use App\Models\TaskHall;
 use App\Models\UserTask;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -15,7 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class UserTaskResource extends Resource
 {
-    protected static ?string $model = UserTask::class;
+    protected static ?string $model = TaskHall::class;
 
 
     protected static ?string $navigationLabel = 'Submitted Tasks';

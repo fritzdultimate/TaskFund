@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\UserTaskResource\Pages;
+namespace App\Filament\Resources\TaskHallResource\Pages;
 
 use App\Filament\Resources\UserTaskResource;
 use Filament\Actions;
