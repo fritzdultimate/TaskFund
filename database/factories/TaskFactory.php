@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\TaskType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,5 +20,35 @@ class TaskFactory extends Factory
         return [
             //
         ];
+    }
+
+    public function youtube(): static {
+        return $this->state(fn (array $attributes) => [
+            'task_type_id' => TaskType::where('name', 'like', '%youtube%')->first('id')->id,
+        ]);
+    }
+
+    public function facebook(): static {
+        return $this->state(fn (array $attributes) => [
+            'task_type_id' => TaskType::where('name', 'like', '%facebook%')->first('id')->id,
+        ]);
+    }
+
+    public function instagram(): static {
+        return $this->state(fn (array $attributes) => [
+            'task_type_id' => TaskType::where('name', 'like', '%instagram%')->first('id')->id,
+        ]);
+    }
+
+    public function tiktok(): static {
+        return $this->state(fn (array $attributes) => [
+            'task_type_id' => TaskType::where('name', 'like', '%tiktok%')->first('id')->id,
+        ]);
+    }
+
+    public function whatsapp(): static {
+        return $this->state(fn (array $attributes) => [
+            'task_type_id' => TaskType::where('name', 'like', '%whatsapp%')->first('id')->id,
+        ]);
     }
 }

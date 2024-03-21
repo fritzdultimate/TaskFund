@@ -13,9 +13,10 @@ class TaskSeeder extends Seeder
      */
     public function run(): void
     {
-        $tasks = config('links');
+        $tasks = config('youtube-tasks');
 
         Task::factory(count($tasks))
+            ->youtube()
             ->state(function () use (&$tasks) {
                 return array_shift($tasks) ?? [];
             })
