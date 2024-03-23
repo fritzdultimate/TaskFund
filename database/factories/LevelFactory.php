@@ -25,4 +25,11 @@ class LevelFactory extends Factory
             'is_automated' => false,
         ];
     }
+
+    // public function levelOne(): static
+    // {
+    //     return $this->state(fn (array $attributes) => [
+    //         'email_verified_at' => null,
+    //     ]);
+    // }
 }
