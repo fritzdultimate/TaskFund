@@ -12,4 +12,13 @@ enum TransactionStatus: string {
     case PROCESSING = "processing";
     case APPROVED = "approved";
     case DECLINED = "declined";
+
+    public static function getColor($value): string | array| null 
+    {
+        return match($value){
+            self::APPROVED->value => 'success',
+            self::DECLINED->value => 'danger',
+            self::PROCESSING->value, self::PENDING->value => 'warning'
+        };
+    }
 }
