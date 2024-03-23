@@ -76,12 +76,7 @@ trait HandleWithdrawalResource
                     ->searchable()
                     ->copyable()
                     ->copyMessage('username copied'),
-                TextColumn::make('wallet.mainWallet.ticker_symbol')
-                    ->label('Wallet'),
-                TextColumn::make('wallet.address')
-                    ->label('User wallet address')
-                    ->copyable()
-                    ->copyMessage('User wallet address copied'),
+              
                 TextColumn::make('amount')
                     ->searchable()
                     ->money('USD'),
@@ -152,20 +147,7 @@ trait HandleWithdrawalResource
                 //     ->searchable()
                 //     ->preload()
                 //     ->native(false),
-                Select::make('userWallet')
-                    ->label('Withdrawal address')
-                    ->options(function (Withdrawal $record) {
-                        return $record->user->wallets->reduce(function ($carry = [], $value) {
-                            $carry[$value->id] = strtoupper($value->mainWallet->symbol) . ' : ' . $value->address;
-                            return $carry;
-                        });
-                    })
-                    // ->getOptionLabelUsing(fn ($value): ?string => dd($value))
-                    // ->default(fn(Withdrawals $record) => dd($record->id))
-                    // ->relationship(name: 'Wallet', titleAttribute: 'name')
-                    ->searchable()
-                    ->native(false),
-
+               
                 TextInput::make('amount'),
                 DateTimePicker::make('created_at')
                     ->label('Withdrawal Date')

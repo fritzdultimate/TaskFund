@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\DeclinedWithdrawalResource\Pages;
 use App\Filament\Resources\DeclinedWithdrawalResource\RelationManagers;
 use App\Models\DeclinedWithdrawal;
+use App\Traits\HandleWithdrawalResource;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -15,9 +16,12 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class DeclinedWithdrawalResource extends Resource
 {
-    protected static ?string $model = DeclinedWithdrawal::class;
+    use HandleWithdrawalResource;
+    // protected static ?string $model = DeclinedWithdrawal::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    // protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationLabel = 'Declined Withdrawals';
+
 
     public static function form(Form $form): Form
     {
