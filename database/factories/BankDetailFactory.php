@@ -17,12 +17,12 @@ class BankDetailFactory extends Factory
     public function definition(): array
     {
         return [
-            'bank_name' => fake()->creditCardType(),
-            'bank_code' => fake()->creditCardNumber(),
-            'currency' => fake()->currencyCode(),
-            'account_number' => fake()->creditCardNumber(),
-            'recipient_code' => fake()->creditCardNumber(),
-            'recipient_id' => fake()->creditCardNumber(),
+            // 'bank_name' => fake()->creditCardType(),
+            // 'bank_code' => fake()->creditCardNumber(),
+            'currency' => 'NGN',
+            'account_number' => '0000000000',
+            // 'recipient_code' => fake()->creditCardNumber(),
+            // 'recipient_id' => fake()->creditCardNumber(),
         ];
     }
 }

@@ -50,6 +50,6 @@ class User extends Authenticatable
     }
 
     public function bankDetail(): HasOne {
-        return $this->hasOne(BankDetail::class);
+        return $this->hasOne(BankDetail::class, );
     }
 }
