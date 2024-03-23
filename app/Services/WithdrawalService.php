@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Enums\TransactionTypes;
-use App\Models\Transaction;
 use App\Models\Withdrawal;
 
 class WithdrawalService
