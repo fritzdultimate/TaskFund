@@ -13,6 +13,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
 use Filament\Support\Enums\ActionSize;
+use Filament\Support\RawJs;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Actions\BulkActionGroup;
@@ -140,7 +141,8 @@ trait HandleWithdrawalResource
                     ->relationship(name: 'user', titleAttribute: 'username')
                     // ->searchable()
                     // ->preload()
-                    ->disabled(true)
+                    ->disabledOn('edit')
+                    // ->disabled(function(Act))
                     ->native(false),
                 // Select::make('main_wallet_id')
                 //     ->relationship(name: 'mainWallet', titleAttribute: 'name')
@@ -148,7 +150,11 @@ trait HandleWithdrawalResource
                 //     ->preload()
                 //     ->native(false),
                
-                TextInput::make('amount'),
+                TextInput::make('amount')
+                ->mask(RawJs::make('$money($input)')) 
+                ->stripCharacters(',')    
+                ->numeric()
+                ->prefix('NGN'),
                 DateTimePicker::make('created_at')
                     ->label('Withdrawal Date')
             ]);

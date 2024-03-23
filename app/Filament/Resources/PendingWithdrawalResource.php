@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\TransactionStatus;
 use App\Filament\Resources\PendingWithdrawalResource\Pages;
 use App\Filament\Resources\PendingWithdrawalResource\RelationManagers;
 use App\Models\PendingWithdrawal;
@@ -22,34 +23,15 @@ class PendingWithdrawalResource extends Resource
     // protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?string $navigationLabel = 'Pending Withdrawals';
+    protected static ?string $modelLabel = 'Pending Withdrawals';
 
 
-    public static function form(Form $form): Form
-    {
-        return $form
-            ->schema([
-                //
-            ]);
+
+    public static function getEloquentQuery(): Builder {
+        return parent::getEloquentQuery()->where('status', TransactionStatus::PENDING)->latest();
     }
 
-    public static function table(Table $table): Table
-    {
-        return $table
-            ->columns([
-                //
-            ])
-            ->filters([
-                //
-            ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
-    }
+   
 
     public static function getRelations(): array
     {

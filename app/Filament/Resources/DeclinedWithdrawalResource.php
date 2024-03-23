@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\TransactionStatus;
 use App\Filament\Resources\DeclinedWithdrawalResource\Pages;
 use App\Filament\Resources\DeclinedWithdrawalResource\RelationManagers;
 use App\Models\DeclinedWithdrawal;
@@ -21,33 +22,10 @@ class DeclinedWithdrawalResource extends Resource
 
     // protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationLabel = 'Declined Withdrawals';
+    protected static ?string $modelLabel = 'Declined Withdrawals';
 
-
-    public static function form(Form $form): Form
-    {
-        return $form
-            ->schema([
-                //
-            ]);
-    }
-
-    public static function table(Table $table): Table
-    {
-        return $table
-            ->columns([
-                //
-            ])
-            ->filters([
-                //
-            ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
+    public static function getEloquentQuery(): Builder {
+        return parent::getEloquentQuery()->where('status', TransactionStatus::DECLINED)->latest();
     }
 
     public static function getRelations(): array

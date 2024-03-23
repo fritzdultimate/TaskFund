@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->decimal('total_earning', 20)->default(0.00);
-            $table->decimal('total_withdrawal', 20)->default(0.00);
+            $table->boolean('is_suspended')->default(false);
+            // $table->decimal('total_withdrawal', 20)->default(0.00);
 
         });
     }
