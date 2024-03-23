@@ -36,7 +36,7 @@ trait HandleUserResource {
 
     public static function getnavigationIcon(): string
         {
-            return 'heroicon-o-banknotes';
+            return 'heroicon-o-users';
         }
 
     public static function getModel(): string
