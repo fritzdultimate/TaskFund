@@ -22,7 +22,10 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class TaskTypeResource extends Resource
 {
+    protected static ?string $navigationGroup = 'Task';
     protected static ?string $model = TaskType::class;
+    protected static ?string $navigationLabel = "Types";
+
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
