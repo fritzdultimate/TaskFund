@@ -12,4 +12,6 @@ enum DepositChannel: string {
     case BANK = "bank";
     case USSD = "ussd";
     case BANK_TRANSFER = "bank transfer";
+    case QR_CODE = "QR code";
+
 }
