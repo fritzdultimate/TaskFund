@@ -32,6 +32,7 @@ class Login extends Component {
                     return $this->showOtp = true;
                 }
                 Auth::login($user);
+                return redirect('/app/dashboard');
                 $this->dispatch('login-s', 'Login was successful');
             }
         } else {
