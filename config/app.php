@@ -18,6 +18,9 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'paystack_secret_key' => 'sk_test_ee8d11704eca40611f818b2e21c0eb4e4f742951',
+    'paystack_public_key' => 'pk_test_17f2454a5fdeca80a6d373a2dd9cf5ec9e0c3864',
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -167,6 +170,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
+        App\Providers\Filament\AdminPanelProvider::class,
         App\Providers\RouteServiceProvider::class,
     ])->toArray(),
 
