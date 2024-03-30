@@ -3,6 +3,8 @@
 namespace App\Livewire\Auth;
 
 use App\Models\User;
+use App\Models\VerificationTokens;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 use Livewire\Attributes\Layout;
@@ -16,19 +18,19 @@ class Registration extends Component {
 
     public $errorMsg = '';
     #[Rule('required|email|unique:users,email')]
-    public $email = '';
-    public $password = '';
+    public $email = 'fritz@gmail.com';
+    public $password = 'Justmefritz@656';
     #[Rule('required|unique:users,username|min:3|alpha_dash')]
-    public $username = '';
+    public $username = 'emmy';
     #[Rule('required|min:2|alpha_dash')]
-    public $firstname = '';
+    public $firstname = 'Emeka';
     #[Rule('required|min:2|alpha_dash')]
-    public $lastname = '';
+    public $lastname = 'Nwosu';
     public $referral = '';
     #[Rule('required')]
-    public $number = '';
+    public $number = '08138222565';
     #[Rule('accepted', message: 'You must accept our terms and conditions to proceed')]
-    public $terms = false;
+    public $terms = true;
 
     public function rules() {
         return [
@@ -42,6 +44,14 @@ class Registration extends Component {
 
     public function register() {
         $this->validate();
+        $data = [
+            'email' => $this->email,
+            'password' => $this->password,
+            'firstname' => $this->firstname,
+            'lastname' => $this->lastname,
+            'username' => $this->username,
+            'from' => 'registration'
+        ];
         $createUser = User::create([
             'username' => $this->username,
             'email' => $this->email,
@@ -52,9 +62,14 @@ class Registration extends Component {
         ]);
 
         if($createUser) {
-            echo 'User created';
-            // verify otp
+            VerificationTokens::create([
+                'user_id' => $createUser->id,
+                'email' => $this->email,
+                'token' => rand(100000, 999999),
+                'expired_at' => Carbon::parse()->addHour()
+            ]);
             if($this->referral) {}
+            $this->dispatch('next-screen', ['payload' => $data, 'screen' => 'auth.account-verification'])->to(RegistrationDistributer::class);
         }
     }
 }

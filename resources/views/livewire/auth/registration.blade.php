@@ -59,7 +59,7 @@
                                 <i x-on:click="visiblePassword = !visiblePassword" :class="visiblePassword ? 'uil-eye' : 'uil-eye-slash'" class="uil pr-5 justify-center items-center flex text-lg text-slate-800 font-bold absolute right-0 top-4 cursor-pointer fill-slate-800"></i>
                             </div>
                             <div class="text-red-600 text-sm">
-                                @if($errorMsg) <span class="error">{{ $errorMsg }}</span> @endif 
+                                @error('password') <span class="error">{{ $message }}</span> @enderror 
                             </div>
 
                         </div>
