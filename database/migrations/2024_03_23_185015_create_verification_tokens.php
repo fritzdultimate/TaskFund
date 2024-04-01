@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('verification_tokens', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('user_id')
-                ->constrained('users')
-                ->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            // $table->foreignUuid('user_id')
+                // ->constrained('users')
+                // ->cascadeOnDelete();
             $table->integer('token');
             $table->string('email');
             $table->timestamp('expired_at');

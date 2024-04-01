@@ -9,6 +9,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class TaskHall extends Model
 {
+    public $fillable = [
+        'task_id',
+        'user_id',
+        'status',
+        'attachment',
+        'created_at',
+        'updated_at'
+    ];
     use HasFactory, SoftDeletes;
 
 
