@@ -5,12 +5,12 @@
             <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Home</span>
         </a>
 
-        <a href="/app/wallets" class="flex flex-col items-center justify-center px-2 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+        <a href="/app/tasks" class="flex flex-col items-center justify-center px-2 hover:bg-gray-50 dark:hover:bg-gray-800 group">
             <i class="uil uil-analysis p-0 m-0 text-slate-500 group-hover:text-blue-600 dark:group-hover:text-blue-500"></i>
             <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Tasks</span>
         </a>
 
-        <a href="/app/wallets" class="inline-flex flex-col items-center justify-center px-2 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+        <a href="/app/level" class="inline-flex flex-col items-center justify-center px-2 hover:bg-gray-50 dark:hover:bg-gray-800 group">
             <i class="uil uil-star text-slate-500 group-hover:text-blue-600 dark:group-hover:text-blue-500"></i>
             <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">level</span>
         </a>

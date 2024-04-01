@@ -9,6 +9,7 @@ use App\Livewire\Misc\MessageResponse;
 use App\Livewire\Auth\RegistrationDistributer;
 use App\Livewire\Dashboard\Home;
 use App\Livewire\Dashboard\Level;
+use App\Livewire\Dashboard\TaskRoom;
 use App\Livewire\Dashboard\Tasks;
 use Illuminate\Support\Facades\Route;
 
@@ -40,5 +41,6 @@ Route::get('/message/response', MessageResponse::class)->name('message');
 
 Route::get('/app/dashboard', Home::class)->name('dashboard');
 Route::get('/app/tasks', Tasks::class)->name('tasks');
+Route::get('/app/task/room', TaskRoom::class)->name('tasks-room');
 Route::get('/app/level', Level::class)->name('level');
 

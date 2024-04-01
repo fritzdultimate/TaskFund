@@ -31,12 +31,12 @@
         </div>
 
         <div class="flex w-full justify-between mb-3">
-            <div class="w-[49%] flex items-center bg-white rounded-3xl text-slate-700 justify-between px-3 py-2">
+            <a href="/app/level" class="w-[49%] flex items-center bg-white rounded-3xl text-slate-700 justify-between px-3 py-2">
                 <span class="text-slate-800 font-semibold text-sm">Deposit</span>
                 <div class="ml-auto rounded-full bg-slate-100 w-7 h-7 flex justify-center items-center">
                     <img src="{{ asset('img/icons/deposit.png') }}" class="w-5 h-5">
                 </div>
-            </div>
+            </a>
             <div class="w-[49%] flex items-center bg-white rounded-3xl text-slate-700 justify-between py-2 px-3">
                 <span class="text-slate-800 font-semibold text-sm">Withdrawal</span>
                 <div class="ml-auto rounded-full bg-slate-100 w-7 h-7 flex justify-center items-center">

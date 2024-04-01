@@ -8,13 +8,13 @@ use Livewire\Component;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 #[Layout('livewire.layouts.dashboard')]
-#[Title('Home for enterpreneurs')]
-class Home extends Component {
+#[Title('Task room for enterpreneurs')]
+class TaskRoom extends Component {
 
     
     public function render()
     {
         // $this->authorize();
-        return view('livewire.dashboard.home');
+        return view('livewire.dashboard.task-room');
     }
 }
