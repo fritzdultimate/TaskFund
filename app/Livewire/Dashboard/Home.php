@@ -19,11 +19,8 @@ class Home extends Component {
         $this->completedTasks = $this->getCompletedTasks();
     }
 
-    public function generateCompletedTasks($length = 10){
+    private function generateCompletedTasks($length = 10){
         $levels = Level::all(['name', 'daily_tasks', 'profit_per_task']);
-
-
-        dd($levels);
 
         $tasks = [];
 
@@ -42,7 +39,7 @@ class Home extends Component {
         return $tasks;
     }
 
-    public function getCompletedTasks(){
+    private function getCompletedTasks(){
         if(session()->missing('completed-tasks')){
            
             $tasks = $this->generateCompletedTasks(20);
