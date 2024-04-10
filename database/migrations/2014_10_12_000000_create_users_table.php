@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('level_id')->constrained('levels')->cascadeOnDelete();
+            $table->foreignId('level_id')->nullable()->constrained('levels')->cascadeOnDelete();
             $table->string('username');
             $table->string('firstname');
             $table->string('lastname');
@@ -24,7 +24,19 @@ return new class extends Migration
             $table->decimal('total_withdrawal', 20)->default(0.00);
             $table->string('password');
             $table->rememberToken();
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->enum('gender', ['male', 'female', 'other'])->default('male');
+            $table->timestamp('date_of_birth')->nullable();
+            $table->string('address')->nullable();
+            $table->string('country')->nullable();
+            $table->string('state')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->boolean('is_suspended')->default(0);
             $table->timestamps();
+            $table->softDeletes();
+            $table->boolean('toured')->default(0);
+
         });
     }
 

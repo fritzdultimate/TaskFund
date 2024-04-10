@@ -1,0 +1,1 @@
+<livewire:misc.message-response :response="$payload['response']" :url="$payload['url']" :bg="$payload['bg']" :text="$payload['text']" :btn-color="$payload['btn-color']" :btn-bg="$payload['btn-bg']" :icon="$payload['icon']" :icon-color="$payload['icon-color']">
