@@ -70,11 +70,11 @@
     <script>
         document.addEventListener('livewire:initialized', () => {
            @this.on('success', (event) => {
-            swal("Good job!", event, "success");
+            swal("Good job!", `${event}`, "success");
            });
 
            @this.on('error', (event) => {
-            swal("Oops", event, "error");
+            swal("Oops", `${event}`, "error");
            });
         });
     

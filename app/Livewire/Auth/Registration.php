@@ -55,8 +55,8 @@ class Registration extends Component {
         $createUser = User::create([
             'username' => $this->username,
             'email' => $this->email,
-            'first_name' => $this->firstname,
-            'last_name' => $this->lastname,
+            'firstname' => $this->firstname,
+            'lastname' => $this->lastname,
             'phone_number' => $this->number,
             'password' => Hash::make($this->password)
         ]);

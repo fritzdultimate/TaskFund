@@ -24,8 +24,6 @@ return new class extends Migration
             $table->decimal('total_withdrawal', 20)->default(0.00);
             $table->string('password');
             $table->rememberToken();
-            $table->string('first_name')->nullable();
-            $table->string('last_name')->nullable();
             $table->enum('gender', ['male', 'female', 'other'])->default('male');
             $table->timestamp('date_of_birth')->nullable();
             $table->string('address')->nullable();
