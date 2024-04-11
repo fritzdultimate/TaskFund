@@ -86,20 +86,45 @@
         
         <div class="h-[300px]">
             <ul id="user-list" class="flex flex-col w-full bg-white">
-                
-                @foreach ($completedTasks as $user => $details)
-                    
                 <li class="flex px-3 py-3 justify-center items-center">
                     <img src="{{ asset('img/icons/user.png') }}" class="w-8 h-8 mr-3">
                     <div class="flex flex-col">
-                        <h3 class="text-xs font-semibold text-slate-700">congratulations {{ $user }}</h3>
-                        <h4 class="text-[10px] font-normal text-slate-400">Completed {{ $details['tasks_completed'] }} tasks today</h4>
+                        <h3 class="text-xs font-semibold text-slate-700">congratulations *** 1234</h3>
+                        <h4 class="text-[10px] font-normal text-slate-400">Completed 5 list today</h4>
                     </div>
     
-                    <div class="ml-auto text-green-600 font-semibold text-xs">₦{{ number_format($details['amount_earned'], 2) }}</div>
+                    <div class="ml-auto text-green-600 font-semibold text-xs">#200</div>
                 </li>
-                @endforeach
     
+                <li class="flex px-3 py-3 justify-center items-center">
+                    <img src="{{ asset('img/icons/user.png') }}" class="w-8 h-8 mr-3">
+                    <div class="flex flex-col">
+                        <h3 class="text-xs font-semibold text-slate-700">congratulations *** 1234</h3>
+                        <h4 class="text-[10px] font-normal text-slate-400">Completed 5 list today</h4>
+                    </div>
+    
+                    <div class="ml-auto text-green-600 font-semibold text-xs">#200</div>
+                </li>
+    
+                <li class="flex px-3 py-3 justify-center items-center">
+                    <img src="{{ asset('img/icons/user.png') }}" class="w-8 h-8 mr-3">
+                    <div class="flex flex-col">
+                        <h3 class="text-xs font-semibold text-slate-700">congratulations *** 1234</h3>
+                        <h4 class="text-[10px] font-normal text-slate-400">Completed 5 list today</h4>
+                    </div>
+    
+                    <div class="ml-auto text-green-600 font-semibold text-xs">#200</div>
+                </li>
+    
+                <li class="flex px-3 py-3 justify-center items-center">
+                    <img src="{{ asset('img/icons/user.png') }}" class="w-8 h-8 mr-3">
+                    <div class="flex flex-col">
+                        <h3 class="text-xs font-semibold text-slate-700">congratulations *** 1234</h3>
+                        <h4 class="text-[10px] font-normal text-slate-400">Completed 5 list today</h4>
+                    </div>
+    
+                    <div class="ml-auto text-green-600 font-semibold text-xs">#200</div>
+                </li>
             </ul>
         </div>
     </div>
