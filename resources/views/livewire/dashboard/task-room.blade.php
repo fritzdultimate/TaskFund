@@ -7,35 +7,24 @@
     <div class="bg-slate-200 w-full flex py-4" wire:ignore>
         <div class="w-full">
             <div class="relative right-0">
-              <ul class="relative flex flex-wrap p-1 list-none rounded-xl text-sm" data-tabs="tabs" role="list">
-                <li class="z-30 flex-auto text-center">
-                  <a class="z-30 flex items-center justify-center w-full px-0 py-1 mb-0 transition-all ease-in-out border-0 rounded-lg cursor-pointer text-slate-700 bg-inherit"
-                    wire:click="switchTask('facebook')"
-                    data-tab-target="" active role="tab" aria-selected="true">
-                    <span class="ml-1">Facebook</span>
-                  </a>
-                </li>
-                <li class="z-30 flex-auto text-center">
-                  <a class="z-30 flex items-center justify-center w-full px-0 py-1 mb-0 transition-all ease-in-out border-0 rounded-lg cursor-pointer text-slate-700 bg-inherit"
-                    wire:click="switchTask('whatsapp')"
-                    data-tab-target="" role="tab" aria-selected="false">
-                    <span class="ml-1">Whatsapp</span>
-                  </a>
-                </li>
-                <li class="z-30 flex-auto text-center">
-                  <a class="z-30 flex items-center justify-center w-full px-0 py-1 mb-0 transition-all ease-in-out border-0 rounded-lg cursor-pointer text-slate-700 bg-inherit"
-                    wire:click="switchTask('instagram')"
-                    data-tab-target="" role="tab" aria-selected="false">
-                    <span class="ml-1">Instagram</span>
-                  </a>
-                </li>
-                <li class="z-30 flex-auto text-center">
-                    <a class="z-30 flex items-center justify-center w-full px-0 py-1 mb-0 transition-all ease-in-out border-0 rounded-lg cursor-pointer text-slate-700 bg-inherit"
-                        wire:click="switchTask('youtube')"
-                      data-tab-target="" role="tab" aria-selected="false">
-                      <span class="ml-1">Youtube</span>
-                    </a>
-                  </li>
+              <ul class="relative flex flex-wrap p-1 list-none rounded-xl text-sm" data-tabs="tabs" role="list" x-data="{
+                url: @js(Request::url()),
+                result(){
+                    let res = this.url.split('/');
+                    let pos = res.indexOf('room');
+                    return res[pos+1] 
+                },
+              }">
+                @foreach ($taskTypes as $type)
+                    <li class="z-30 flex-auto text-center">
+                        <a class="z-30 flex items-center justify-center w-full px-0 py-1 mb-0 transition-all ease-in-out border-0 rounded-lg cursor-pointer text-slate-700 bg-inherit"
+                        wire:click="switchTask(`{{ $type->name }}`)"
+                        x-on:click="processAjaxData(`{{ URL::to('/') . '/app/task/room/' . $type->name }}`)"
+                        data-tab-target="" active role="tab" x-bind:aria-selected="{true: 'Whatsapp' == @js($current)}">
+                        <span class="ml-1">{{ $type->name }}</span>
+                        </a>
+                    </li>
+                @endforeach
               </ul>
             </div>
           </div> 
@@ -70,13 +59,15 @@
     <script>
         document.addEventListener('livewire:initialized', () => {
            @this.on('success', (event) => {
-            swal("Good job!", event, "success");
+            swal("Good job!", `${event}`, "success");
            });
 
            @this.on('error', (event) => {
-            swal("Oops", event, "error");
+            swal("Oops", `${event}`, "error");
            });
         });
-    
+        function processAjaxData(urlPath){
+            window.history.replaceState(null, document.title, urlPath)
+        }
     </script>
 @endpush

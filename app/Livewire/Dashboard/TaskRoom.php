@@ -18,6 +18,9 @@ use Livewire\Attributes\Locked;
 class TaskRoom extends Component {
     #[Locked]
     public $tasks = [];
+    #[Locked]
+    public $taskTypes = [];
+    public $current = '';
     public $level = 1;
 
     
@@ -55,8 +58,11 @@ class TaskRoom extends Component {
         $this->tasks = Task::where('task_type_id', $task_type->id)->get();
     }
 
-    public function mount() {
+    public function mount(TaskType $type) {
         $facebook_task_type = TaskType::where('name', 'facebook')->first();
-        $this->tasks = Task::where('task_type_id', $facebook_task_type->id)->get();
+        $type = $type->id ? $type : $facebook_task_type;
+        $this->tasks = Task::where('task_type_id', $type->id)->get();
+        $this->taskTypes = TaskType::all();
+        $this->current = $type->name;
     }
 }

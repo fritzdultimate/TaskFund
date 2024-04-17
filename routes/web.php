@@ -42,5 +42,6 @@ Route::get('/message/response', MessageResponse::class)->name('message');
 Route::get('/app/dashboard', Home::class)->name('dashboard');
 Route::get('/app/tasks', Tasks::class)->name('tasks');
 Route::get('/app/task/room', TaskRoom::class)->name('tasks-room');
+Route::get('/app/task/room/{type:name}', TaskRoom::class)->name('tasks-room');
 Route::get('/app/level', Level::class)->name('level');
 
