@@ -21,15 +21,44 @@ class Home extends Component
 
     public function boot()
     {
-        // session()->forget(['completed-tasks-yep', $key]);
+        // session()->forget(['completed-tasks', 'referrals']);
 
-        $this->completedTasks = $this->getCompletedTasks();
-        $this->referrals = $this->getReferrals();
+        // $this->completedTasks = $this->getCompletedTasks();
+        // $this->referrals = $this->getReferrals();
 
-        // dd($this->completedTasks, $this->referrals);
+        session()->forget(['a', 'b']);
+
+
+         $this->completedTasks = $this->a();
+        $this->referrals = $this->b();
+        dd($this->completedTasks, $this->referrals);
     }
 
-   
+    private function getAOrB($isA){
+        return $isA ? ['a' => 'a'] : ['b' => 'b'];
+    }
+
+    private function a(){
+        if(session()->missing('a')){
+            //do stuffs
+            $a = $this->getAOrB(isA:true);
+
+            session(['a' => $a]);
+            return $a;
+        }
+        return session('a');
+    }
+    private function b(){
+        if(session()->missing('b')){
+            //do stuffs
+            $b = $this->getAOrB(isA:false);
+
+            session(['b' => $b]);
+
+            return $b;
+        }
+        return session('b');
+    }
 
     #[Computed]
     public function levels(){
@@ -59,13 +88,7 @@ class Home extends Component
                 'amount_earned' => $level->daily_tasks * $level->profit_per_task,
             ];
 
-            if($isReferral){
-                $data["****" . $rand] = $referralData;
-            } else {
-                $data["****" . $rand] = $tasksData;
-            }
-
-            // $data["****" . $rand] = $isReferral ? $referralData : $tasksData;
+            $data["****" . $rand] = $isReferral ? $referralData : $tasksData;
 
         }
 
@@ -75,34 +98,35 @@ class Home extends Component
 
     private function getCompletedTasks()
     {
-        $key = 'completed-tasks-' . auth()->id();
-
-        if (session()->missing($key)) {
+        if (session()->missing('completed-tasks')) {
 
             $tasks = $this->generateData(20, isReferral:false);
 
-            session([$key => $tasks]);
+            session()->put('completed-tasks', $tasks);
 
             return $tasks;
         }
 
-        return session($key);
+        return session()->get('completed-tasks');
     }
 
     private function getReferrals()
     {
-        $key = 'referrals-' . auth()->id();
         
-        if (session()->missing($key)) {
+        if (session()->missing('referrals')) {
             
             $referrals = $this->generateData(20, isReferral:true);
             
-            session([$key => $referrals]);
+            
+            session()->put('referrals', $referrals);
+            
             
             return $referrals;
         }
         
-        return session($key);
+        dd(session()->all());
+
+        return session()->get('referrals');
     }
 
     public function render()

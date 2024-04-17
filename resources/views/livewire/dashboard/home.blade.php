@@ -7,11 +7,17 @@
         </div>
     </div>
 
-    <div class="bg-white rounded-3xl border-l-2 border-l-green-600 text-slate-500 my-5 mx-3 p-4 text-xs font-bold">
-        <p class="flex justify-center items-center">
-            <i class="uil uil-info-circle text-2xl text-green-600 mr-2 font-bold"></i>
-            Congratulations to member ****8797 for recommending an L3 and getting a promotion reward of #20,000
-        </p>
+    <div class="h-[78px] bg-white rounded-3xl overflow-hidden border-l-2 border-l-green-600 text-slate-500 my-5 mx-3 text-xs font-bold">
+        <ul id="referrals" class="h-[78px] overflow-hidden" style="">
+            @foreach ($referrals as $user => $referral)     
+            <li class="h-[78px] flex justify-center items-center p-[16px]">
+                <p class="flex justify-center items-center">
+                    <i class="uil uil-info-circle text-2xl text-green-600 mr-2 font-bold"></i>
+                    Congratulations to member {{ $user }} for recommending an {{ $referral['name'] }} and getting a promotion reward of ₦{{ number_format($referral['referral_bonus'],2) }}
+                </p>
+            </li>
+            @endforeach
+        </ul>
     </div>
 
     <div class="flex mx-3 flex-col">
@@ -110,6 +116,9 @@
         
         // document.addEventListener('load', () => {
             // alert('heyy');
+            $('#referrals').marquee({
+                delay: 4000
+            });
             $('#user-list').marquee(); 
         // });
     </script>
