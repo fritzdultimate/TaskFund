@@ -35,7 +35,7 @@
                 </div>
             </div>
 
-            <form x-on:submit.prevent="deposit" class="flex md:w-[400px] md:pt-[24px] p-[24px] bg-white rounded-[32px] flex-col items-start gap-4 text-slate-500">
+            <form x-on:submit.prevent="deposit" class="flex md:w-[70%] lg:w-[60%] xl:w-[50%] md:pt-[24px] p-[24px] bg-white rounded-[32px] flex-col items-start gap-4 text-slate-500 mx-auto">
                 <div class="w-full">
                     <div class="flex flex-col gap-2 md:self-stretch w-full">
                         <label for="amount" class="text-[16px] font-semibold leading-5 text-slate-700">Amount</label>

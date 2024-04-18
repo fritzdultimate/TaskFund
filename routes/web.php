@@ -41,12 +41,17 @@ Route::get('/register/details/confirmed', AccountCreated::class)->name('details-
 Route::get('/forgot-password', ForgotPassword::class)->name('forgot-password');
 Route::get('/message/response', MessageResponse::class)->name('message');
 
-Route::get('/app/dashboard', Home::class)->name('dashboard');
-Route::get('/app/deposit', Deposit::class)->name('deposit');
-Route::get('/app/tasks', Tasks::class)->name('tasks');
-Route::get('/app/task/room', TaskRoom::class)->name('tasks-room');
-Route::get('/app/task/room/{type:name}', TaskRoom::class)->name('tasks-room');
-Route::get('/app/level', Level::class)->name('level');
+Route::middleware(['auth'])->group(function(){
+
+    Route::get('/app/dashboard', Home::class)->name('dashboard');
+    Route::get('/app/deposit', Deposit::class)->name('deposit');
+    Route::get('/app/tasks', Tasks::class)->name('tasks');
+    Route::get('/app/task/room', TaskRoom::class)->name('tasks-room');
+    Route::get('/app/task/room/{type:name}', TaskRoom::class)->name('tasks-room');
+    Route::get('/app/level', Level::class)->name('level');
+    
+});
+
 
 Route::get('/hooks/deposit', ProcessDepositController::class)->name('process-deposit');
 
