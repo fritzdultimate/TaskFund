@@ -19,5 +19,25 @@ class Task extends Model
     public function type() : BelongsTo {
         return $this->belongsTo(TaskType::class, 'task_type_id');
     }
+
+    public function scopeYoutube() {
+        return $this->where('task_type_id', TaskType::where('name', 'like', '%youtube%')->first('id')->id)->get();
+    }
+
+    public function scopeFacebook() {
+        return $this->where('task_type_id', TaskType::where('name', 'like', '%facebook%')->first('id')->id)->get();
+    }
+
+    public function scopeInstagram() {
+        return $this->where('task_type_id', TaskType::where('name', 'like', '%instagram%')->first('id')->id)->get();
+    }
+
+    public function scopeTiktok() {
+        return $this->where('task_type_id', TaskType::where('name', 'like', '%tiktok%')->first('id')->id)->get();
+    }
+
+    public function scopeWhatsapp() {
+        return $this->where('task_type_id', TaskType::where('name', 'like', '%whatsapp%')->first('id')->id)->get();
+    }
     
 }

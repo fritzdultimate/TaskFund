@@ -37,6 +37,7 @@
           </div> 
     </div>
 
+    
     <div class="flex flex-col w-full my-6 px-3">
         <div class="flex w-full justify-between items-center mt-6">
             <div class="mt-12">
