@@ -1,6 +1,6 @@
 <div class="bg-slate-100 h-full w-full">
     <div class="flex bg-white py-3 w-full items-center">
-        <div class="basis-[10%]">
+        <div class="basis-[10%] absolute">
             <div class="mr-auto" id="returnBack"></div>
         </div>
         <h1 class="text-slate-800 font-semibold text-xl text-center w-full basis-full">

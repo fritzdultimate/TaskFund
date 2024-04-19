@@ -18,6 +18,7 @@ use App\Livewire\Dashboard\Level;
 use App\Livewire\Dashboard\PersonalInformation;
 use App\Livewire\Dashboard\PiggyMoney;
 use App\Livewire\Dashboard\Profile;
+use App\Livewire\Dashboard\RealName;
 use App\Livewire\Dashboard\TaskRecords;
 use App\Livewire\Dashboard\TaskRoom;
 use App\Livewire\Dashboard\Tasks;
@@ -66,6 +67,9 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/app/invite-friends', InviteFriends::class)->name('invite-friends');
     Route::get('/app/piggy-money', PiggyMoney::class)->name('piggy-money');
     Route::get('/app/accounting-records', AccountingRecords::class)->name('accounting-records');
+
+    Route::get('/app/info/name', RealName::class)->name('real-name');
+
 });
 
 
