@@ -28,4 +28,8 @@ class Level extends Model
     {
         return new LevelBuilder($query);
     }
+
+    public function getIsCurrentAttribute(){
+        return $this->id == auth()->user()->level_id;
+    }
 }

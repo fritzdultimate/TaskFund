@@ -4,6 +4,7 @@ namespace App\Livewire\Dashboard;
 
 use App\Models\Level;
 use App\Models\Task;
+use App\Models\TaskType;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -29,6 +30,10 @@ class Home extends Component
         // dd($this->completedTasks, $this->referrals);
     }
 
+    #[Computed]
+    public function taskTypes(){
+        return TaskType::all(['name']);
+    }
    
 
     #[Computed]

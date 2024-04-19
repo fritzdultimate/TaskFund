@@ -21,7 +21,7 @@
     </div>
 
     <div class="flex mx-3 flex-col">
-        <div class="flex w-full justify-between mb-3">
+        <div class="flex w-full justify-between mb-3 columns-2">
             <div class="w-[49%] flex items-center bg-white rounded-3xl text-slate-700 justify-between px-3 py-2">
                 <span class="text-slate-800 font-semibold text-sm">Profile</span>
                 <div class="ml-auto rounded-full bg-slate-100 w-7 h-7 flex justify-center items-center">
@@ -55,34 +55,17 @@
     <div class="flex flex-col">
         <h3 class="text-base text-slate-800 mx-3 font-semibold my-3">Task Room</h3>
         <div class="flex mx-3 flex-col">
-            <div class="flex w-full justify-between mb-3">
-                <a href="/app/task/room/Facebook" class="w-[49%] flex items-center bg-white rounded-3xl text-slate-700 justify-between px-3 py-2">
-                    <span class="text-slate-800 font-semibold text-sm">Facebook</span>
+            <div class="w-full justify-between mb-3 grid grid-cols-2 gap-4">
+                @foreach ($this->taskTypes as $taskType)     
+                <a href="{{ route('tasks-room', ['type' => strtolower($taskType->name)]) }}" class="col-span-1 flex items-center bg-white rounded-3xl text-slate-700 justify-between px-3 py-2">
+                    <span class="text-slate-800 font-semibold text-sm">
+                        {{ ucFirst($taskType->name) }}
+                    </span>
                     <div class="ml-auto rounded-full bg-slate-100 w-7 h-7 flex justify-center items-center">
-                        <img src="{{ asset('img/icons/facebook.png') }}" class="w-5 h-5">
+                        <img src="{{ $taskType->icon }}" class="w-5 h-5">
                     </div>
                 </a>
-                <a href="/app/task/room/WhatsApp" class="w-[49%] flex items-center bg-white rounded-3xl text-slate-700 justify-between py-2 px-3">
-                    <span class="text-slate-800 font-semibold text-sm">WhatsApp</span>
-                    <div class="ml-auto rounded-full bg-slate-100 w-7 h-7 flex justify-center items-center">
-                        <img src="{{ asset('img/icons/whatsapp.png') }}" class="w-5 h-5">
-                    </div>
-                </a>
-            </div>
-    
-            <div class="flex w-full justify-between mb-3">
-                <div class="w-[49%] flex items-center bg-white rounded-3xl text-slate-700 justify-between px-3 py-2">
-                    <span class="text-slate-800 font-semibold text-sm">Instagram</span>
-                    <div class="ml-auto rounded-full bg-slate-100 w-7 h-7 flex justify-center items-center">
-                        <img src="{{ asset('img/icons/instagram.png') }}" class="w-5 h-5">
-                    </div>
-                </div>
-                <div class="w-[49%] flex items-center bg-white rounded-3xl text-slate-700 justify-between py-2 px-3">
-                    <span class="text-slate-800 font-semibold text-sm">Youtube</span>
-                    <div class="ml-auto rounded-full bg-slate-100 w-7 h-7 flex justify-center items-center">
-                        <img src="{{ asset('img/icons/youtube.png') }}" class="w-5 h-5">
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>

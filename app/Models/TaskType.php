@@ -20,6 +20,10 @@ class TaskType extends Model
         'is_active' => 'boolean',
     ];
 
+    public function getIconAttribute(){
+        return asset('img/icons/' . strtolower($this->name). '.png');
+    }
+
     public function scopeYoutube($query, $columns = []) {
         return $query->where('name', 'like', '%youtube%')->first($columns);
     }

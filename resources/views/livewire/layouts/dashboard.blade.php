@@ -35,7 +35,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
         @livewireStyles
 
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @vite(['resources/css/app.css', 'resources/css/font.css', 'resources/js/app.js'])
         {{-- <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/unicons.css" /> --}}
         <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
         @stack('styles-top')

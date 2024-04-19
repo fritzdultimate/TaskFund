@@ -20,24 +20,24 @@ class Task extends Model
         return $this->belongsTo(TaskType::class, 'task_type_id');
     }
 
-    public function scopeYoutube() {
-        return $this->where('task_type_id', TaskType::where('name', 'like', '%youtube%')->first('id')->id)->get();
+    public function scopeYoutube($query) {
+        return $query->where('task_type_id', TaskType::where('name', 'like', '%youtube%')->first('id')->id);
     }
 
-    public function scopeFacebook() {
-        return $this->where('task_type_id', TaskType::where('name', 'like', '%facebook%')->first('id')->id)->get();
+    public function scopeFacebook($query) {
+        return $query->where('task_type_id', TaskType::where('name', 'like', '%facebook%')->first('id')->id);
     }
 
-    public function scopeInstagram() {
-        return $this->where('task_type_id', TaskType::where('name', 'like', '%instagram%')->first('id')->id)->get();
+    public function scopeInstagram($query) {
+        return $query->where('task_type_id', TaskType::where('name', 'like', '%instagram%')->first('id')->id);
     }
 
-    public function scopeTiktok() {
-        return $this->where('task_type_id', TaskType::where('name', 'like', '%tiktok%')->first('id')->id)->get();
+    public function scopeTiktok($query) {
+        return $query->where('task_type_id', TaskType::where('name', 'like', '%tiktok%')->first('id')->id);
     }
 
-    public function scopeWhatsapp() {
-        return $this->where('task_type_id', TaskType::where('name', 'like', '%whatsapp%')->first('id')->id)->get();
+    public function scopeWhatsapp($query) {
+        return $query->where('task_type_id', TaskType::where('name', 'like', '%whatsapp%')->first('id')->id);
     }
     
 }

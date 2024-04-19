@@ -6,6 +6,7 @@ use App\Models\Level;
 use App\Models\Task;
 use App\Models\TaskHall;
 use App\Models\TaskType;
+use App\Models\User;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -16,7 +17,8 @@ use Livewire\Attributes\Locked;
 
 #[Layout('livewire.layouts.dashboard')]
 #[Title('Task room for enterpreneurs')]
-class TaskRoom extends Component {
+class TaskRoom extends Component
+{
     #[Locked]
     public $tasks = [];
     #[Locked]
@@ -28,79 +30,90 @@ class TaskRoom extends Component {
     public $activeTab;
     public $type;
 
-    
     #[Computed]
-    public function youtubeTasks(){
-        return Task::youtube();
-    }
-    #[Computed]
-    public function facebookTasks(){
-        return Task::facebook();
-    }
-    #[Computed]
-    public function whatsappTasks(){
-        return Task::whatsapp();
-    }
-    #[Computed]
-    public function tiktokTasks(){
-        return Task::tiktok();
+    public function addedTasks()
+    {
+        return TaskHall::where('user_id', auth()->id())->pluck('task_id')->toArray();
     }
 
     #[Computed]
-    public function instagramTasks(){
-        return Task::instagram();
+    public function youtubeTasks()
+    {
+        return Task::youtube()->whereNotIn('id', $this->addedTasks)->get();
+    }
+    #[Computed]
+    public function facebookTasks()
+    {
+        return Task::facebook()->whereNotIn('id', $this->addedTasks)->get();;
+    }
+    #[Computed]
+    public function whatsappTasks()
+    {
+        return Task::whatsapp()->whereNotIn('id', $this->addedTasks)->get();;
+    }
+    #[Computed]
+    public function tiktokTasks()
+    {
+        return Task::tiktok()->whereNotIn('id', $this->addedTasks)->get();;
     }
 
-    public function handleActiveTasks($tasks, $type){
+    #[Computed]
+    public function instagramTasks()
+    {
+        return Task::instagram()->whereNotIn('id', $this->addedTasks)->get();;
+    }
+
+    public function handleActiveTasks($tasks, $type)
+    {
         $this->activeTab = TaskType::{$type}(['id', 'name']);
 
         return $tasks;
     }
 
-    public function handleDefaultTask(){
+    public function handleDefaultTask()
+    {
         $firstTask = TaskType::first(['id', 'name']);
         $this->activeTab = $firstTask;
         return Task::where('task_type_id', $firstTask->id)->get();
     }
 
     #[Computed]
-    public function activeTasks(){
-        
+    public function activeTasks()
+    {
+
         $activeTaskName = $this->type;
-        
-        $activeTasks = match($activeTaskName){
-            'youtube' => $this->handleActiveTasks($this->youtubeTasks(), 'youtube'), 
+
+        $activeTasks = match ($activeTaskName) {
+            'youtube' => $this->handleActiveTasks($this->youtubeTasks(), 'youtube'),
             'facebook' => $this->handleActiveTasks($this->facebookTasks(), 'facebook'),
             'tiktok' => $this->handleActiveTasks($this->tiktokTasks(), 'tiktok'),
             'whatsapp' => $this->handleActiveTasks($this->whatsappTasks(), 'whatsapp'),
             default => $this->handleDefaultTask(),
         };
 
-        // dd($this->activeTab);
-
         return $activeTasks;
     }
 
-    public function render() {
-        // $this->authorize();
-        return view('livewire.dashboard.task-room');
-    }
-
-    public function takeTask($id) {
-        $level = Level::where('id', 1)->first();
-        $tasks = TaskHall::where('user_id', Auth::id())->get();
-
-        if($tasks->count() < $level->daily_tasks) {
+    
+    public function takeTask($id)
+    {
+        $user =  User::active();
+        $level = $user->level;
+        $tasks = $user->taskHalls();
+        
+        if ($tasks->count() < $level->daily_tasks) {
             $tasks_already_exists = TaskHall::where([
                 'task_id' => $id,
                 'user_id' => Auth::id(),
-            ])->first();
-            if(!$tasks_already_exists) {
+            ])->exists();
+            if (!$tasks_already_exists) {
                 $task_hall = TaskHall::create([
                     'task_id' => $id,
                     'user_id' => Auth::id(),
                 ]);
 
+                unset($this->activeTasks);
+                
                 $this->dispatch('success', 'Task added to queue of pending tasks');
             } else {
                 $this->dispatch('error', 'Task has already been added to queue');
@@ -110,24 +123,29 @@ class TaskRoom extends Component {
         }
     }
 
-    public function switchTask($task) {
+    public function switchTask($task)
+    {
         $task_type = TaskType::where('name', $task)->first();
         $this->tasks = Task::where('task_type_id', $task_type->id)->get();
     }
 
-    public function changeTab($type){
+    public function changeTab($type)
+    {
         // dd(request()->query('type'));
         $this->type = $type;
 
         unset($this->activeTasks);
     }
-
-    public function mount(TaskType $type) {
+    
+    public function mount(TaskType $type)
+    {
         $facebook_task_type = TaskType::where('name', 'facebook')->first();
         $type = $type->id ? $type : $facebook_task_type;
 
         $this->changeTab(strtolower(request()->query('type')));
-
+        
+        $this->addedTasks;
+        
         $this->activeTasks;
         
         $this->tasks = Task::where('task_type_id', $type->id)->get();
@@ -136,5 +154,10 @@ class TaskRoom extends Component {
         $this->taskTypes = TaskType::all();
 
         $this->current = $type->name;
+    }
+    
+    public function render()
+    {
+        return view('livewire.dashboard.task-room');
     }
 }

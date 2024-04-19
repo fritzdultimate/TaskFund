@@ -23,6 +23,7 @@ return new class extends Migration
             $table->decimal('total_earning', 20)->default(0.00);
             $table->decimal('total_withdrawal', 20)->default(0.00);
             $table->string('password');
+            $table->string('fund_password')->nullable();
             $table->rememberToken();
             $table->enum('gender', ['male', 'female', 'other'])->default('male');
             $table->timestamp('date_of_birth')->nullable();

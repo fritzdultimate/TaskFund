@@ -8,11 +8,20 @@ use App\Livewire\Auth\ForgotPassword;
 use App\Livewire\Auth\Login;
 use App\Livewire\Misc\MessageResponse;
 use App\Livewire\Auth\RegistrationDistributer;
+use App\Livewire\Dashboard\AccountingRecords;
+use App\Livewire\Dashboard\DailyStatement;
 use App\Livewire\Dashboard\Deposit;
+use App\Livewire\Dashboard\Earning;
 use App\Livewire\Dashboard\Home;
+use App\Livewire\Dashboard\InviteFriends;
 use App\Livewire\Dashboard\Level;
+use App\Livewire\Dashboard\PersonalInformation;
+use App\Livewire\Dashboard\PiggyMoney;
+use App\Livewire\Dashboard\Profile;
+use App\Livewire\Dashboard\TaskRecords;
 use App\Livewire\Dashboard\TaskRoom;
 use App\Livewire\Dashboard\Tasks;
+use App\Livewire\Dashboard\TeamReports;
 use Illuminate\Support\Facades\Route;
 
 // use Illuminate\Support\Facades\Route;
@@ -42,14 +51,21 @@ Route::get('/forgot-password', ForgotPassword::class)->name('forgot-password');
 Route::get('/message/response', MessageResponse::class)->name('message');
 
 Route::middleware(['auth'])->group(function(){
-
     Route::get('/app/dashboard', Home::class)->name('dashboard');
     Route::get('/app/deposit', Deposit::class)->name('deposit');
     Route::get('/app/tasks', Tasks::class)->name('tasks');
     Route::get('/app/task/room', TaskRoom::class)->name('tasks-room');
-    Route::get('/app/task/room/{type:name}', TaskRoom::class)->name('tasks-room');
+    // Route::get('/app/task/room/{type:name}', TaskRoom::class)->name('tasks-room');
     Route::get('/app/level', Level::class)->name('level');
-    
+    Route::get('/app/profile', Profile::class)->name('profile');
+    Route::get('/app/earning', Earning::class)->name('earning');
+    Route::get('/app/personal-information', PersonalInformation::class)->name('personal-information');
+    Route::get('/app/task-records', TaskRecords::class)->name('task-records');
+    Route::get('/app/daily-statement', DailyStatement::class)->name('daily-statement');
+    Route::get('/app/team-reports', TeamReports::class)->name('team-reports');
+    Route::get('/app/invite-friends', InviteFriends::class)->name('invite-friends');
+    Route::get('/app/piggy-money', PiggyMoney::class)->name('piggy-money');
+    Route::get('/app/accounting-records', AccountingRecords::class)->name('accounting-records');
 });
 
 
