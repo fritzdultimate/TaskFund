@@ -9,6 +9,7 @@ use App\Livewire\Auth\Login;
 use App\Livewire\Misc\MessageResponse;
 use App\Livewire\Auth\RegistrationDistributer;
 use App\Livewire\Dashboard\AccountingRecords;
+use App\Livewire\Dashboard\BankCard;
 use App\Livewire\Dashboard\DailyStatement;
 use App\Livewire\Dashboard\Deposit;
 use App\Livewire\Dashboard\Earning;
@@ -69,6 +70,8 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/app/accounting-records', AccountingRecords::class)->name('accounting-records');
 
     Route::get('/app/info/name', RealName::class)->name('real-name');
+
+    Route::get('/app/info/bank-card', BankCard::class)->name('bank-card');
 
 });
 

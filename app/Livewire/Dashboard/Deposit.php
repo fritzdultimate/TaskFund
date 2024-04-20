@@ -67,7 +67,10 @@ class Deposit extends Component
                 redirect()->away($data['authorization_url']);
             }
         } catch (\Illuminate\Http\Client\ConnectionException $e) {
-            return ['success' => false, 'message' => 'We\'re seeing a temporary connection issue. Give it another shot in a moment!'];
+            return [
+                'success' => false, 
+                'message' => 'We\'re seeing a temporary connection issue. Give it another shot in a moment!'
+            ];
         }
     }
 
