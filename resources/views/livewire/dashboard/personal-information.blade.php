@@ -87,9 +87,9 @@
                             Fund Password
                         </span>
                     </div>
-                    <div>
+                    <a href="{{ route('fund-password') }}">
                        <span class="text-sm"> Click Settings </span> >
-                    </div>
+                    </a>
                 </div>
             </li>
         </ul>

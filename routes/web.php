@@ -14,6 +14,7 @@ use App\Livewire\Dashboard\ChangePassword;
 use App\Livewire\Dashboard\DailyStatement;
 use App\Livewire\Dashboard\Deposit;
 use App\Livewire\Dashboard\Earning;
+use App\Livewire\Dashboard\FundPassword;
 use App\Livewire\Dashboard\Home;
 use App\Livewire\Dashboard\InviteFriends;
 use App\Livewire\Dashboard\Level;
@@ -75,6 +76,9 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/app/info/bank-card', BankCard::class)->name('bank-card');
 
     Route::get('/app/info/change-password', ChangePassword::class)->name('change-password');
+
+    Route::get('/app/info/fund-password', FundPassword::class)->name('fund-password');
+
 
 });
 
