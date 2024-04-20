@@ -4,7 +4,9 @@ namespace App\Services;
 
 use App\Enums\TransactionStatus;
 use App\Enums\TransactionTypes;
+use App\Models\User;
 use App\Models\Withdrawal;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
@@ -13,15 +15,33 @@ class WithdrawalService
 
     public function create($details)
     {
-        $withdrawal = Withdrawal::create([
-            'user_id' => $details['user_id'],
-            'amount' => $details['amount'],
-            'transaction' => [
+
+        $success = false;
+        $withdrawal = null;
+
+        DB::transaction(function() use(&$success, &$withdrawal, $details) {
+
+            $user = User::active();
+    
+            $withdrawal = $user->withdrawals()->create([
+                'user_id' => $details['user_id'],
+                'amount' => $details['amount'],
+                'bank_detail_id' => $details['bank_detail_id'],
+            ]);
+    
+    
+            $withdrawal->transactions()->create([
                 'user_id' => auth()->id(),
                 'type' => TransactionTypes::WITHDRAWAL,
-                'transactionable_type' => Withdrawal::class,
-            ]
-        ]);
+            ]);
+    
+            session()->flash('success');
+            $success = true;
+    
+        });
+
+        return $withdrawal;
+
     }
 
     public function approveWithdrawal($withdrawalId)

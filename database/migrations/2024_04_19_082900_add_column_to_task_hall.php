@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('fund_password')->nullable()->change();
+        Schema::table('withdrawals', function (Blueprint $table) {
+            // $table->string('fund_password')->nullable()->change();
+            // $table->foreignId('bank_detail_id')->constrained('bank_details')->cascadeOnDelete();
+            $table->dropColumn('bank_details_id');
         });
     }
 
@@ -21,7 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::disableForeignKeyConstraints();
+        Schema::table('withdrawals', function (Blueprint $table) {
             //
         });
     }

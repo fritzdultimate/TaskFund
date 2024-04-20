@@ -52,3 +52,7 @@
   #root, #__next {
     isolation: isolate;
   }
+
+  .withdrawal-amounts.active {
+    @apply bg-blue-700 text-white
+  }

@@ -66,12 +66,20 @@ class User extends Authenticatable
         return $this->hasMany(Transaction::class);
     }
 
+    public function withdrawals(): HasMany {
+        return $this->hasMany(Withdrawal::class);
+    }
+
     public function taskHalls(): HasMany {
         return $this->hasMany(TaskHall::class);
     }
 
     public function level(): BelongsTo {
         return $this->belongsTo(Level::class, 'level_id');
+    }
+
+    public function bankDetails(): HasMany {
+        return $this->hasMany(BankDetail::class);
     }
 
     public function bankDetail(): HasOne {

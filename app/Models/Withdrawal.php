@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Withdrawal extends Model
@@ -17,7 +18,7 @@ class Withdrawal extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function transaction(): MorphOne {
-        return $this->morphOne(Transaction::class, 'transactionable');
+    public function transactions(): MorphMany {
+        return $this->morphMany(Transaction::class, 'transactionable');
     }
 }
