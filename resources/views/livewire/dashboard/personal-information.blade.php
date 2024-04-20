@@ -74,9 +74,9 @@
                             Login Password
                         </span>
                     </div>
-                    <div>
+                    <a href="{{ route('change-password') }}">
                        <span class="text-sm"> Click Settings </span> >
-                    </div>
+                    </a>
                 </div>
             </li>
             <li class="flex">
