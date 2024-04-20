@@ -125,7 +125,7 @@
                 Notiflix.Notify.Success(response.message);
 
                 setTimeout(() => {
-                    location.href = "{{ route('personal-information') }}";
+                    location.href = "{{ route('wallet', ['type' => 'withdrawal']) }}";
                 }, 2000);
 
             },
