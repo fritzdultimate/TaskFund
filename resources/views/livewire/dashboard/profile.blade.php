@@ -1,4 +1,4 @@
-<div class="bg-slate-100 h-full w-full">
+<div class="bg-slate-100 h-full w-full font-poppins">
     <div class="flex bg-white py-3 w-full items-center">
         <div class="basis-[10%] absolute">
             <div class="mr-auto" id="returnBack"></div>
@@ -22,9 +22,9 @@
         </div>
     </div>
     <div class="py-[26px] flex justify-center items-center">
-        <div class="w-[114px] text-center px-[10px] py-1 font-poppins text-[12px] text-[#5362B2] rounded-[16px] border-[#5362B2] border-[1px]">
+        <a href="{{ route('wallet') }}" class="w-[114px] text-center px-[10px] py-1 font-poppins text-[12px] text-[#5362B2] rounded-[16px] border-[#5362B2] border-[1px]">
             Wallets
-        </div>
+        </a>
     </div>
 
     <div class="grid grid-cols-2 gap-4 px-4">
@@ -178,4 +178,6 @@
             </li>
         </ul>
     </div>
+
+    @include('livewire.partials.footer')
 </div>

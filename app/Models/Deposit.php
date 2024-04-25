@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Support\Str;
 
 class Deposit extends Model
 {
@@ -14,7 +15,9 @@ class Deposit extends Model
 
     protected $guarded = [];
 
-
+    public function getDateAttribute(){
+        return $this->created_at->format('YmdHisv');
+    }
 
     public function user(): BelongsTo {
         return $this->belongsTo(User::class);
@@ -22,5 +25,19 @@ class Deposit extends Model
 
     public function transactions(): MorphMany {
         return $this->morphMany(Transaction::class, 'transactionable');
+    }
+
+    public function getAmountFormattedAttribute(){
+        
+        return "₦" . number_format($this->amount);
+    }
+
+    public function getStatusColorAttribute(){
+        return match($this->status){
+            'pending' => 'badge-pending',
+            'approved' => 'badge-approved',
+            'processing' => 'badge-processing',
+            'declined' => 'badge-declined',
+        };
     }
 }

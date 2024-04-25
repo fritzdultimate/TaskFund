@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->string('reference');
             $table->decimal('amount', 20);
-            $table->enum('status', TransactionStatus::values())->default(TransactionStatus::PROCESSING);
+            $table->enum('status', TransactionStatus::values())->default(TransactionStatus::PENDING);
             $table->enum('channel', DepositChannel::values())->nullable();
             $table->timestamps();
         });

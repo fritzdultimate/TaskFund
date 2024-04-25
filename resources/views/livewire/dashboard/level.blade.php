@@ -40,4 +40,5 @@
         @endforeach
     </div>
 
+    @include('livewire.partials.footer')
 </div>

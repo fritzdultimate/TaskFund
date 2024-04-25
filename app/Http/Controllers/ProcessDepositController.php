@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\TransactionStatus;
 use App\Enums\TransactionTypes;
 use App\Models\Deposit;
 use App\Models\User;
@@ -22,20 +23,18 @@ class ProcessDepositController extends Controller
         DB::transaction(function() use($request, &$success) {
 
             $user = User::active();
-            $amount = (float) session('payment_init.amount_in_naira');
+            // $amount = (float) session('payment_init.amount_in_naira');
+
+            $deposit = Deposit::find(session('payment_init.deposit_id'));
     
-            $deposit = $user->deposits()->create([
-                'reference' => $request->query('reference'),
-                'amount' => $amount
-            ]);
+            $deposit->update(['status' => TransactionStatus::APPROVED]);
+
+            // $deposit = $user->deposits()->create([
+            //     'reference' => $request->query('reference'),
+            //     'amount' => $amount
+            // ]);
     
-    
-            $deposit->transactions()->create([
-                'user_id' => auth()->id(),
-                'type' => TransactionTypes::DEPOSIT,
-            ]);
-    
-            $user->increment('balance', $amount);
+            $user->increment('balance', $deposit->amount);
 
             session()->flash('success');
             $success = true;
