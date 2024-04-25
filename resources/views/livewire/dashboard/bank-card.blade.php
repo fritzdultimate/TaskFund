@@ -93,7 +93,7 @@
 
                 let response = await @this.saveDetails();
                 
-                if(!response || !'message' in response) return;
+                if(!response || !('message' in response)) return;
 
                 if(!response.success) return Notiflix.Notify.Failure(response.message);
 

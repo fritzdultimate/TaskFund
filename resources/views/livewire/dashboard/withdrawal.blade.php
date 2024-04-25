@@ -3,6 +3,9 @@
         .select2-container--default .select2-selection--single .select2-selection__arrow {
             top: initial !important;
         }
+        .select2.select2-container{
+            width: 100% !important;
+        }
     </style>
     <div class="flex bg-white py-3 w-full items-center">
         <div class="basis-[10%] absolute">

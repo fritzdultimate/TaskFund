@@ -78,19 +78,20 @@ class TaskRoom extends Component
             })
             ->get();;
     }
-    public function reachedTaskLimit()
-    {
-        return $this->totalSelectedTasks == auth()->user()->level->daily_tasks;
-    }
-
+        
     #[Computed]
     public function instagramTasks()
     {
         return Task::instagram()
-            ->when($this->reachedTaskLimit(), function ($query) {
-                return $query->whereNotIn('id', $this->addedTasks);
-            })
-            ->get();;
+        ->when($this->reachedTaskLimit(), function ($query) {
+            return $query->whereNotIn('id', $this->addedTasks);
+        })
+        ->get();;
+    }
+    
+    public function reachedTaskLimit()
+    {
+        return $this->totalSelectedTasks == auth()->user()->level->daily_tasks;
     }
 
     public function handleActiveTasks($tasks, $type)
