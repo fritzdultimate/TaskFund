@@ -1,14 +1,50 @@
-<div class="bg-slate-100 h-full w-full">
-    <div>
-        <div class="bg-blue-500 h-32 w-full flex flex-col justify-center items-center text-slate-300 font-bold relative bg-cover" style="background-image: url({{ asset('img/campaign-creators-gMsnXqILj.png') }})">
-            <div class="absolute bg-slate-800 opacity-85 w-full h-32 right-0 top-0"></div>
-            <h1 class="font-mono text-2xl z-10">{{ env('APP_NAME') }} Company</h1>
-            <h3 class="text-sm font-sans z-10">You Task, We Fund.</h3>
+<div class="bg-slate-100 h-full w-full" x-data="home">
+   <div>
+    <div class="swiper">
+        <div class="swiper-wrapper home-swiper">
+            <div class="swiper-slide">
+                <div class="bg-blue-500 h-32 w-full flex flex-col justify-center items-center text-slate-300 font-bold relative bg-cover" style="background-image: url({{ asset('img/campaign-creators-gMsnXqILj.png') }})">
+                    <div class="absolute bg-slate-800 opacity-85 w-full h-32 right-0 top-0"></div>
+                    <h1 class="font-mono text-2xl z-10">{{ env('APP_NAME') }} Company</h1>
+                    <h3 class="text-sm font-sans z-10">You Task, We Fund.</h3>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="bg-blue-500 h-32 w-full flex flex-col justify-center items-center text-slate-300 font-bold relative bg-cover" style="background-image: url({{ asset('img/cover-image-3.jpg') }})">
+                    <div class="absolute bg-slate-800 opacity-85 w-full h-32 right-0 top-0"></div>
+                    <h1 class="font-mono text-2xl z-10">{{ env('APP_NAME') }} Company</h1>
+                    <h3 class="text-sm font-sans z-10">You Task, We Fund.</h3>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="bg-blue-500 h-32 w-full flex flex-col justify-center items-center text-slate-300 font-bold relative bg-cover" style="background-image: url({{ asset('img/cover-image-4.jpg') }})">
+                    <div class="absolute bg-slate-800 opacity-85 w-full h-32 right-0 top-0"></div>
+                    <h1 class="font-mono text-2xl z-10">{{ env('APP_NAME') }} Company</h1>
+                    <h3 class="text-sm font-sans z-10">You Task, We Fund.</h3>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="bg-blue-500 h-32 w-full flex flex-col justify-center items-center text-slate-300 font-bold relative bg-cover" style="background-image: url({{ asset('img/cover-image-5.jpg') }})">
+                    <div class="absolute bg-slate-800 opacity-85 w-full h-32 right-0 top-0"></div>
+                    <h1 class="font-mono text-2xl z-10">{{ env('APP_NAME') }} Company</h1>
+                    <h3 class="text-sm font-sans z-10">You Task, We Fund.</h3>
+                </div>
+            </div>
         </div>
+        <div class="autoplay-progress">
+            <svg viewBox="0 0 48 48">
+              <circle cx="24" cy="24" r="20"></circle>
+            </svg>
+            <span></span>
+          </div>
     </div>
+    
+   </div>
 
-    <div class="h-[78px] bg-white rounded-3xl overflow-hidden border-l-2 border-l-green-600 text-slate-500 my-5 mx-3 text-xs font-bold">
-        <ul id="referrals" class="h-[78px] overflow-hidden" style="">
+    <div wire:ignore class="h-[78px] bg-white rounded-3xl overflow-hidden border-l-2 border-l-green-600 text-slate-500 my-5 mx-3 text-xs font-bold">
+        {{-- <ul data-duplicated='false' id="referrals" class="h-[78px] overflow-hidden" style=""> --}}
+        <ul data-duplicated='false' id="referrals">
+
             @foreach ($referrals as $user => $referral)     
             <li class="h-[78px] flex justify-center items-center p-[16px]">
                 <p class="flex justify-center items-center">
@@ -95,17 +131,42 @@
 
     @include('livewire.partials.footer')
 
-    <script src="{{ asset('libs/jquery.min.js') }}"></script>
-    <script src="{{ asset('libs/jquery.marquee.js') }}"></script>
-    <script>
-        
-        // document.addEventListener('load', () => {
-            // alert('heyy');
-            $('#referrals').marquee({
-                delay: 4000
-            });
-            $('#user-list').marquee(); 
-        // });
-    </script>
-
+    <script defer src="{{ asset('libs/jquery.min.js') }}"></script>
+    <script defer src="{{ asset('libs/jquery.marquee.js') }}"></script>
 </div>
+
+@script
+<script>
+    Alpine.data('home', () => ({
+        init(){
+            this.$nextTick(() => {
+                const progressCircle = document.querySelector(".autoplay-progress svg");
+                const progressContent = document.querySelector(".autoplay-progress span");
+
+                const swiper = new Swiper('.swiper', {
+                    loop: true,
+                    autoplay: {
+                        delay: 5000,
+                        disableOnInteraction: false
+                    },
+                    on: {
+                        autoplayTimeLeft(s, time, progress) {
+                        progressCircle.style.setProperty("--progress", 1 - progress);
+                        progressContent.textContent = `${Math.ceil(time / 1000)}s`;
+                        }
+                    }
+                });
+
+                document.querySelector('.home-swiper').classList.remove('home-swiper');
+                
+                $('#referrals').marquee({
+                    delay: 4000,
+                    duplicated: false,
+                });
+
+                $('#user-list').marquee(); 
+            });
+        }
+    }));
+</script>
+@endscript
