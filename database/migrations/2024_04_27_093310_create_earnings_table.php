@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->integer('earnable_id');
             $table->string('earnable_type');
-            // $table->decimal('amount', 20);
             $table->timestamps();
         });
     }

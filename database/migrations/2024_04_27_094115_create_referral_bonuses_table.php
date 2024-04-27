@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('referral_bonuses', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('referred_user_id')->constrained('users')->cascadeOnDelete();
+            $table->decimal('amount', 20);
             $table->timestamps();
         });
     }

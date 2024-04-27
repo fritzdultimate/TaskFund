@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('task_earnings', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('task_hall_id')->constrained('task_halls')->cascadeOnDelete();
+            $table->decimal('amount', 20);
             $table->timestamps();
         });
     }

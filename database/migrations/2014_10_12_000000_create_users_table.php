@@ -35,7 +35,6 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->boolean('toured')->default(0);
-
         });
     }
 
