@@ -1,8 +1,12 @@
-<div x-data="taskroom" class="flex flex-col w-full bg-[#FAFAFA] pb-[100px] font-poppins">
-    <div class="flex shadow-sm py-3 w-full items-center bg-white">
-        <div class="mr-auto" id="returnBack"></div>
-        <h1 class="text-slate-800 font- text-lg text-center w-full font-poppins">Task Room</h1>
-    </div>
+<div x-data="taskroom" class="flex flex-col w-full min-h-full bg-[#FAFAFA] pb-[100px] font-poppins">
+
+    <x-dashboard.header
+        title="Task Room"
+    >
+        <x-slot:rightLink>
+            {{-- right link --}}        
+        </x-slot:rightLink>
+    </x-dashboard.header>
 
     <div class="bg-[#4657AD] h-[127px] grid grid-cols-2 text-white">
         <div class="flex items-center flex-col h-full justify-center">
@@ -56,7 +60,7 @@
     </div>
 
     <div role="tabpanel" id="content" class="bg-white">
-        @foreach ($this->activeTasks as $task)
+        @forelse ($this->activeTasks as $task)
             <div class="flex px-3 py-4 items-center border-b border-slate-100">
                 <div class="flex items-center">
                    
@@ -78,7 +82,11 @@
                     @endif
                 </button>
             </div>
-        @endforeach
+        @empty
+            <div class="flex px-3 py-4 items-center text-center justify-center">
+                No New Tasks Yet
+            </div>
+        @endforelse
     </div>
 
 

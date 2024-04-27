@@ -1,4 +1,4 @@
-<div class="bg-slate-100 w-full pb-[100px] font-poppins" x-data="fundPassword">
+<div class="bg-slate-100 w-full min-h-full pb-[100px] font-poppins">
     <style>
         .select2-container--default .select2-selection--single .select2-selection__arrow {
             top: initial !important;
@@ -7,21 +7,13 @@
             width: 100% !important;
         }
     </style>
-    <div class="flex bg-white py-3 w-full items-center">
-        <div class="basis-[10%] absolute">
-            <a x-on:click="history.go(-1)">
-                <div class="mr-auto p-2 pl-4" id="returnBack">
-                    <x-arrow-back-icon/>
-                </div>
-            </a>
-        </div>
-        <h1 class="text-slate-800 font-semibold text-xl text-center w-full basis-full">
-            Wallet
-        </h1>
-        {{-- <div class="basis-[10%] absolute text-xs right-0 px-4">
-            History
-        </div> --}}
-    </div>
+    <x-dashboard.header
+        title="Wallet"
+    >
+        <x-slot:rightLink>
+            {{-- right link --}}        
+        </x-slot:rightLink>
+    </x-dashboard.header>
 
     <div class="py-5">
         <div class="w-96 m-auto bg-red-100 rounded-xl relative text-white transition-transform transform ">
@@ -65,7 +57,7 @@
               <nav id="taskTypes" x-ref="taskTypes" class="relative space-x-2 justify-center items-center flex task-types"  role="tablist">
                 
                     <button 
-                    x-on:click="changeTab('Deposit')"
+                    {{-- x-on:click="changeTab('Deposit')" --}}
                     data-hs-tab="#deposit-records" 
                     {{-- key="{{ strtolower($type->name) }}"  --}}
                     {{-- id="{{ strtolower($type->name) }}"  --}}
@@ -76,7 +68,7 @@
                     </button>
 
                     <button 
-                    x-on:click="changeTab('Withdrawal')"
+                    {{-- x-on:click="changeTab('Withdrawal')" --}}
                     data-hs-tab="#withdrawal-records" 
                     {{-- key="{{ strtolower($type->name) }}"  --}}
                     {{-- id="{{ strtolower($type->name) }}"  --}}
@@ -92,7 +84,8 @@
 
     <div>
         <div id="deposit-records" role="tabpanel" aria-labelledby="deposit-records" class="p-5">
-            @foreach ($this->deposits as $deposit)
+           
+            @forelse ($this->deposits as $deposit)
                 <div class="flex flex-col bg-white mb-2 p-5 shadow-sm rounded-md">
                     <div class="flex flex-row justify-between border-b p-2 pb-3">
                         <span class="text-sm">
@@ -111,12 +104,38 @@
                         </span>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <div class="text-center">
+                    No Records yet
+                </div>
+            @endforelse
           </div>
-          <div id="withdrawal-records" class="hidden" role="tabpanel" aria-labelledby="withdrawal-records">
-            @foreach ($this->withdrawals as $withdrawal)
-                
-            @endforeach
+          <div id="withdrawal-records" class="hidden p-5" role="tabpanel" aria-labelledby="withdrawal-records">
+            
+            @forelse($this->withdrawals as $withdrawal)
+            <div class="flex flex-col bg-white mb-2 p-5 shadow-sm rounded-md">
+                <div class="flex flex-row justify-between border-b p-2 pb-3">
+                    <span class="text-sm">
+                        {{ $withdrawal->date }}
+                    </span>
+                    <span class="text-sm">
+                        {{ $withdrawal->created_at }}
+                    </span>
+                </div>
+                <div class="flex flex-row justify-between p-2">
+                    <span class="text-lg font-poppins">
+                        {{ $withdrawal->amount_formatted }}
+                    </span>
+                    <span class="{{ $withdrawal->status_color }}">
+                        {{ ucfirst($withdrawal->status) }} Withdraw
+                    </span>
+                </div>
+            </div>
+            @empty
+            <div class="text-center">
+                No Records yet
+            </div>
+            @endforelse
           </div>
     </div>
 

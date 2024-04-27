@@ -21,4 +21,22 @@ class Withdrawal extends Model
     public function transactions(): MorphMany {
         return $this->morphMany(Transaction::class, 'transactionable');
     }
+
+    public function getDateAttribute(){
+        return $this->created_at->format('YmdHisv');
+    }
+
+    public function getAmountFormattedAttribute(){
+        
+        return "₦" . number_format($this->amount);
+    }
+
+    public function getStatusColorAttribute(){
+        return match($this->status){
+            'pending' => 'badge-pending',
+            'approved' => 'badge-approved',
+            'processing' => 'badge-processing',
+            'declined' => 'badge-declined',
+        };
+    }
 }

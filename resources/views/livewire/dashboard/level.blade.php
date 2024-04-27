@@ -1,10 +1,13 @@
-<div class="flex flex-col w-full h-full mb-16">
-    <div class="flex my-3 w-full items-center">
-        <div class="mr-auto" id="returnBack"></div>
-        <h1 class="text-slate-800 font-semibold text-xl text-center w-full">Level</h1>
-    </div>
+<div class="flex flex-col bg-slate-100 w-full min-h-full mb-16 pb-[100px]">
+    <x-dashboard.header
+        title="Level"
+    >
+        <x-slot:rightLink>
+            {{-- right link --}}        
+        </x-slot:rightLink>
+    </x-dashboard.header>
 
-    <div class="flex flex-col px-3 mb-16">
+    <div class="flex flex-col px-3 pt-5 mb-16">
         @foreach ($this->levels as $level)
             <div class="{{ $level->is_current ? 'bg-[#5362B2]' : 'bg-[#53B2AC]' }} px-3 py-4 flex flex-col rounded-xl mb-3">
                 <h3 class="capitalize text-slate-100 font-bold flex justify-center">

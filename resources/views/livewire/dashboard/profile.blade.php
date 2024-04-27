@@ -1,15 +1,12 @@
 <div class="bg-slate-100 h-full w-full font-poppins">
-    <div class="flex bg-white py-3 w-full items-center">
-        <div class="basis-[10%] absolute">
-            <div class="mr-auto" id="returnBack"></div>
-        </div>
-        <h1 class="text-slate-800 font-semibold text-xl text-center w-full basis-full">
-            Profile
-        </h1>
-        {{-- <div class="ml-auto px-4 text-xs basis-[10%]">
-            History
-        </div> --}}
-    </div>
+    <x-dashboard.header
+        title="Profile"
+    >
+        <x-slot:rightLink>
+            {{-- right link --}}        
+        </x-slot:rightLink>
+    </x-dashboard.header>
+
     <div class="bg-white">
         <div class="bg-[#5362B2] h-[84px] rounded-b-[50px] flex gap-[8px] justify-center items-center flex-col">
             <img class="h-[40px] w-[40px]" src="{{ asset('img/icons/user.png') }}" alt="">

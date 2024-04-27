@@ -1,28 +1,25 @@
 <div class="bg-slate-100 h-full w-full" x-data="deposit">
+
+    <x-dashboard.header
+        title="Deposit"
+    >
+        <x-slot:rightLink>
+            <a href="{{ route('wallet') }}">
+                History
+            </a>
+        </x-slot:rightLink>
+    </x-dashboard.header>
+
     <div 
-    class="flex bg-white py-3 w-full items-center"
     @if(session()->has('deposit-success'))
         x-init="$wire.dispatch('deposit-success', {{ json_encode(session('deposit-success')) }})"
     @endif
     @if(session()->has('cancelled'))
     x-init="$wire.dispatch('cancelled', {{ json_encode(session('cancelled')) }})"
-    @endif
-    >
-        <div class="basis-[10%]">
-
-            <div class="mr-auto" id="returnBack"></div>
-        </div>
-        <h1 class="text-slate-800 font-semibold text-xl text-center w-full basis-full">
-            Deposit
-        </h1>
-        <div class="ml-auto px-4 text-xs basis-[10%]">
-            History
-        </div>
+    @endif>
     </div>
 
-
-   
-
+    
     <div class="flex flex-col">
         <div class="px-[20px]">
 

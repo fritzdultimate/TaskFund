@@ -1,20 +1,12 @@
 
     <div x-data="task" class="flex flex-col w-full min-h-full pb-[100px] font-poppins bg-slate-100">
-        <div class="flex bg-white py-3 w-full items-center">
-            <div class="basis-[10%] absolute">
-                <a x-on:click="history.go(-1)">
-                    <div class="mr-auto p-2 pl-4" id="returnBack">
-                        <x-arrow-back-icon/>
-                    </div>
-                </a>
-            </div>
-            <h1 class="text-slate-800 font-semibold text-xl text-center w-full basis-full">
-                Task Hall
-            </h1>
-            {{-- <div class="basis-[10%] absolute text-xs right-0 px-4">
-                History
-            </div> --}}
-        </div>
+        <x-dashboard.header
+            title="Task Hall"
+        >
+            <x-slot:rightLink>
+                {{-- right link --}}        
+            </x-slot:rightLink>
+        </x-dashboard.header>
     
         <div class=" w-full flex py-4">
             <div class="w-full">

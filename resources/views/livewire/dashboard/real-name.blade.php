@@ -1,17 +1,13 @@
 <div class="bg-slate-100 h-full w-full" x-data="realName">
-    <div class="flex bg-white py-3 w-full items-center">
-        <div class="basis-[10%] absolute">
-            <div class="mr-auto" id="returnBack"></div>
-        </div>
-        <h1 class="text-slate-800 font-semibold text-xl text-center w-full basis-full">
-            Detailed Information
-        </h1>
-        
-    </div>
 
-
-   
-
+    <x-dashboard.header
+        title="Detailed Information"
+    >
+        <x-slot:rightLink>
+            {{-- right link --}}        
+        </x-slot:rightLink>
+    </x-dashboard.header>
+    
     <div class="flex flex-col pt-[50px]">
         <div class="px-[20px]">
             <form x-on:submit.prevent="setRealName" class="flex md:w-[70%] lg:w-[60%] xl:w-[50%] md:pt-[24px] p-[24px] bg-white rounded-[32px] flex-col items-start gap-4 text-slate-500 mx-auto">

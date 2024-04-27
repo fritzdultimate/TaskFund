@@ -1,18 +1,14 @@
 <div class="bg-slate-100 h-full w-full">
-    <div class="flex bg-white py-3 w-full items-center shadow-md">
-        <div class="basis-[10%] absolute">
-            <div class="mr-auto" id="returnBack"></div>
-        </div>
-        <h1 class="text-slate-800 font-semibold text-xl text-center w-full basis-full">
-            Personal Information
-        </h1>
-        {{-- <div class="ml-auto px-4 text-xs basis-[10%]">
-            History
-        </div> --}}
-    </div>
+    <x-dashboard.header
+        title="Personal Information"
+    >
+        <x-slot:rightLink>
+            {{-- right link --}}        
+        </x-slot:rightLink>
+    </x-dashboard.header>
   
 
-    <div class="bg-white px-4 pt-[30px] pb-[100px]">
+    <div class="bg-[#ffffffcf] h-full px-4 pt-[30px] pb-[100px]">
         <ul class="flex flex-col gap-[28px]">
             <li class="flex">
                 <div class="flex justify-between w-full" href="{{ route('personal-information') }}">

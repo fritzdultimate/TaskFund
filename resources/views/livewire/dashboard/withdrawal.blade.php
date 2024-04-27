@@ -7,17 +7,15 @@
             width: 100% !important;
         }
     </style>
-    <div class="flex bg-white py-3 w-full items-center">
-        <div class="basis-[10%] absolute">
-            <div class="mr-auto" id="returnBack"></div>
-        </div>
-        <h1 class="text-slate-800 font-semibold text-xl text-center w-full basis-full">
-            Withdrawal
-        </h1>
-        <div class="basis-[10%] absolute text-xs right-0 px-4">
-            History
-        </div>
-    </div>
+    <x-dashboard.header
+        title="Withdrawal"
+    >
+        <x-slot:rightLink>
+            <a href="{{ route('wallet') }}">
+                History
+            </a>
+        </x-slot:rightLink>
+    </x-dashboard.header>
 
 
    

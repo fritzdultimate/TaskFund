@@ -13,7 +13,7 @@ use Livewire\Component;
 class Wallet extends Component
 {
     public function mount(){
-        // dd($this->deposits()[0]->date);
+        // dd($this->withdrawals);
     }
 
     #[Computed]
@@ -23,6 +23,7 @@ class Wallet extends Component
 
     #[Computed]
     public function withdrawals(){
+        return collect([]);
         return User::active()->withdrawals()->get();
     }
 
