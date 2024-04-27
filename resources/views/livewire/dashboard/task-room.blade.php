@@ -1,4 +1,4 @@
-<div x-data="taskroom" class="flex flex-col w-full bg-[#FAFAFA] pb-[100px]">
+<div x-data="taskroom" class="flex flex-col w-full bg-[#FAFAFA] pb-[100px] font-poppins">
     <div class="flex shadow-sm py-3 w-full items-center bg-white">
         <div class="mr-auto" id="returnBack"></div>
         <h1 class="text-slate-800 font- text-lg text-center w-full font-poppins">Task Room</h1>
@@ -57,8 +57,9 @@
 
     <div role="tabpanel" id="content" class="bg-white">
         @foreach ($this->activeTasks as $task)
-            <div class="flex px-3 my-6 items-center">
+            <div class="flex px-3 py-4 items-center border-b border-slate-100">
                 <div class="flex items-center">
+                   
                     <img src="{{ asset($task->type->image) }}" class="w-8 h-8">
                     <div class="flex flex-col text-sm ml-2">
                         <h3 class="text-slate-400"> Request:{{ $task->type->name }}</h3>
@@ -80,6 +81,8 @@
         @endforeach
     </div>
 
+
+    @include('livewire.partials.footer')
 
 </div>
 

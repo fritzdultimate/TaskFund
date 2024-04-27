@@ -22,6 +22,7 @@ use App\Livewire\Dashboard\PersonalInformation;
 use App\Livewire\Dashboard\PiggyMoney;
 use App\Livewire\Dashboard\Profile;
 use App\Livewire\Dashboard\RealName;
+use App\Livewire\Dashboard\TaskDetail;
 use App\Livewire\Dashboard\TaskRecords;
 use App\Livewire\Dashboard\TaskRoom;
 use App\Livewire\Dashboard\Tasks;
@@ -67,6 +68,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/app/level', Level::class)->name('level');
     Route::get('/app/profile', Profile::class)->name('profile');
     Route::get('/app/earning', Earning::class)->name('earning');
+    Route::get('/app/task-detail/{id}', TaskDetail::class)->name('task-detail');
     Route::get('/app/personal-information', PersonalInformation::class)->name('personal-information');
     Route::get('/app/task-records', TaskRecords::class)->name('task-records');
     Route::get('/app/daily-statement', DailyStatement::class)->name('daily-statement');

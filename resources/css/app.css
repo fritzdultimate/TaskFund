@@ -69,3 +69,29 @@
   .badge-approved{
     @apply bg-green-400  text-white badge
   }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  }
+
+  .task-pending {
+    @apply text-orange-400 bg-orange-400/20
+  }
+  .task-processing {
+    @apply text-blue-400 bg-blue-400/20
+  }
+
+  .task-completed {
+    @apply text-green-400 bg-green-400/20
+  }
+
+  .task-declined {
+    @apply text-red-400 bg-red-400/20
+  }

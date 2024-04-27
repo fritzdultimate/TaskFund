@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Dashboard;
 
+use App\Enums\TaskStatus;
 use App\Enums\TransactionStatus;
 use App\Models\Task;
 use App\Models\TaskHall;
@@ -9,16 +10,54 @@ use App\Models\TaskType;
 use App\Models\User;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Locked;
 use Livewire\Attributes\Title;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 #[Layout('livewire.layouts.dashboard')]
 #[Title('Tasks for enterpreneurs')]
 class Tasks extends Component {
 
+    use WithFileUploads;
+
     public $activeTab;
     public $type;
     public $statuses = [];
+
+    // #[Locked]
+    public $activeTaskId;
+
+    #[Validate(['attachments.*.*' => 'image|max:1024'])]
+    public $attachments = [
+
+    ];
+
+    #[Computed]
+    public function activeTask(){
+        return TaskHall::find($this->activeTaskId);
+    }
+
+    public function submitTask($activeTaskId){
+        
+        if(!$this->activeTask) return ['success' => false, 'message' => 'Invalid Task or Task not found'];
+
+        $attachments = [];
+
+        foreach ($this->attachments[$this->activeTaskId] as $attachment) {
+            array_push($attachments, $attachment->store('tasks', 'public'));
+        }
+
+        $this->activeTask->update([
+            'attachments' => $attachments,
+            'status' => TaskStatus::PROCESSING,
+        ]);
+
+        unset($this->activeTasks);
+
+        return ['success' => true, 'message' => 'Task successfully submitted for audit'];
+    }
 
     #[Computed]
     public function pendingTasks(){

@@ -10,15 +10,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class TaskHall extends Model
 {
+    use HasFactory, SoftDeletes;
+    
     public $fillable = [
         'task_id',
         'user_id',
         'status',
-        'attachment',
+        'attachments',
         'created_at',
         'updated_at'
     ];
-    use HasFactory, SoftDeletes;
+
+    protected $casts = [
+        'attachments' => 'array'
+    ];
+
 
     public function task(): BelongsTo {
         return $this->belongsTo(Task::class, 'task_id');

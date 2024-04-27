@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('task_id')->constrained('tasks')->cascadeOnDelete();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->enum('status', TaskStatus::values())->default(TaskStatus::PENDING);
-            $table->json('attachment')->nullable();
+            $table->json('attachments')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
