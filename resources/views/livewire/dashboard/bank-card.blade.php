@@ -23,8 +23,8 @@
                 <form x-on:submit.prevent="saveDetails" class="flex md:w-[70%] lg:w-[60%] xl:w-[50%] md:pt-[24px] p-[24px] bg-white rounded-[32px] flex-col items-start gap-4 text-slate-500 mx-auto">
                     <div class="w-full">
                         <div class="flex flex-col gap-2 md:self-stretch w-full">
-                            <label for="realname" class="text-[16px] font-semibold leading-5 text-slate-700">Name</label>
-                            <input x-model="realname" readonly disabled type="text" id="realname" name="realname" placeholder="Please Enter A Real Name" aria-label="real_name" aria-invalid="false" autocomplete="disabled" autocorrect="off" autocapitalize="off" class="md:py-[12px] py-1 px-6 rounded-3xl border border-white text-sm bg-[white!important] h-[48px]  ring-1 ring-blue-50 focus:!ring-2 focus:ring-blue-200 outline-none disabled:bg-[##f1f5f933]">
+                            <label for="legalName" class="text-[16px] font-semibold leading-5 text-slate-700">Name</label>
+                            <input x-model="legalName" readonly disabled type="text" id="legalName" name="legalName" placeholder="Please Enter A Real Name" aria-label="real_name" aria-invalid="false" autocomplete="disabled" autocorrect="off" autocapitalize="off" class="md:py-[12px] py-1 px-6 rounded-3xl border border-white text-sm bg-[white!important] h-[48px]  ring-1 ring-blue-50 focus:!ring-2 focus:ring-blue-200 outline-none disabled:bg-[##f1f5f933]">
                             {{-- <div class="text-red-600 text-sm">
                                 @error('email') <span class="error">{{ $message }}</span> @enderror 
                             </div> --}}
@@ -82,7 +82,6 @@
             <template x-if="!isAdd">
                 <div class="w-96">
                     <div class="relative">
-
                         @foreach ($this->userBanks as $userBank)
                         <div class="bg-red-100 rounded-xl relative text-white transition-transform transform ">
                
@@ -149,12 +148,17 @@
             isAdd: false,
             initializedSelect2: false,
             fetchBanksError: @entangle('fetchBanksError'),
-            realname: @entangle('realname'),
+            legalName: @entangle('legalName'),
             bankId: @entangle('bankId'),
             bankIdx: @entangle('bankIdx'),
             accountNumber: @entangle('accountNumber'),
 
             async saveDetails(){
+
+                if(!this.legalName) {
+                   return Notiflix.Confirm.Show('Link Legal Name', 'You have not linked your name yet. Please link it first', 'Confirm', 'Dismiss', this.confirmPopUp, this.cancelPopUp);
+                }
+
                 if(!this.bankId) return Notiflix.Notify.Failure('Please select a bank');
                 if(!this.accountNumber) return Notiflix.Notify.Failure('Please enter your bank account number'); 
 
@@ -184,7 +188,21 @@
                     this.bankIdx = data.element.dataset.idx;
                 });
             },
+            
+            confirmPopUp(){
+                location.href = "{{ route('real-name') }}";
+            },
+            cancelPopUp(){
+
+            },
             init(){
+
+                // console.log(this.legalName);
+
+                if(!this.legalName) {
+                    Notiflix.Confirm.Show('Link Legal Name', 'You have not linked your name yet. Please link it first', 'Confirm', 'Dismiss', this.confirmPopUp, this.cancelPopUp);
+                }
+
                 this.$watch('isAdd', (val) => {
                     this.initBanks();
                     // if(val && !this.initializedSelect2){

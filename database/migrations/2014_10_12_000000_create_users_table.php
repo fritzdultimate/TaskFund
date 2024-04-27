@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('username');
             $table->string('firstname');
             $table->string('lastname');
+            $table->string('legal_name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->decimal('balance', 20)->default(0.00);

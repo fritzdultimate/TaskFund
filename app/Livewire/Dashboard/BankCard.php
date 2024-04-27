@@ -15,24 +15,24 @@ use Livewire\Component;
 #[Title('Level for enterpreneurs')]
 class BankCard extends Component
 {
-    public ?string $realname = null;
+    public ?string $legalName = null;
     public ?string $bankId = null;
     public ?string $bankIdx = null;
     public ?string $accountNumber = null;
     public bool $fetchBanksError = false;
 
-
     public function mount()
     {
-        $this->realname =  User::active()->bankDetail->account_name;
+        $this->legalName =  User::active()->legal_name;
 
         $this->fetchBanksError = count($this->banks) == 0;
+
     }
 
     #[Computed]
     public function userBanks(){
         // return collect([]);
-        return User::active()->bankDetails;
+        return User::active()->bankDetails()->with(['user'])->get();
     }
 
     public function saveDetails()
@@ -45,7 +45,7 @@ class BankCard extends Component
 
                 $response = Http::paystack()->post('/transferrecipient', [
                     "type" => "nuban",
-                    "name" => $this->realname,
+                    "name" => $this->legalName,
                     "account_number" => $this->accountNumber,
                     "bank_code" => $bank['code'],
                     "currency" => $bank['currency']

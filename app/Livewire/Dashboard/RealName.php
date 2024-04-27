@@ -13,22 +13,21 @@ class RealName extends Component
 {
 
     
-    public string $realname;
+    public ?string $realname;
 
     public function mount(){
-        $this->realname =  User::active()->bankDetail->account_name;
+        $this->realname =  User::active()->legal_name;
     }
 
     public function setRealName(){
-        $record = User::active()->bankDetail->updateOrCreate(
-            ['user_id' => auth()->id()],
-            ['account_name' => $this->realname]
-        );
+        $record = User::active()->update([
+            'legal_name' => $this->realname
+        ]);
 
-        if($record){
-             to_route('personal-information');
+        // if($record){
+            //  to_route('personal-information');
              return ['success' => true, 'message' => 'updated successfully'];
-        }
+        // }
     }
 
     public function render()
