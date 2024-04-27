@@ -111,6 +111,7 @@
             withdrawalAmount: @entangle('withdrawalAmount'),
             fundPassword: @entangle('fundPassword'),
             withdrawalMethodId: @entangle('withdrawalMethodId'),
+            userHasLinkedBankAccount : @js($userHasLinkedBankAccount),
 
            
             async requestWithdrawal(){
@@ -148,7 +149,16 @@
                     : el.classList.remove('active');
                 });
             },
+            ConfirmBankPopUp(){
+                location.href = "{{ route('bank-card') }}";
+            },
+            cancelBankPopUp(){
+
+            },
             init(){
+                if(!this.userHasLinkedBankAccount) {
+                    Notiflix.Confirm.Show('Link Bank', 'You have not linked a bank yet. Please link it first', 'Confirm', 'Dismiss', this.ConfirmBankPopUp, this.cancelBankPopUp);
+                }
                 // alert('hey');
             //    console.log(this.availableAmounts);
             $('#bank').select2({

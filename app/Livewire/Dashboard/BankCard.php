@@ -29,6 +29,12 @@ class BankCard extends Component
         $this->fetchBanksError = count($this->banks) == 0;
     }
 
+    #[Computed]
+    public function userBanks(){
+        // return collect([]);
+        return User::active()->bankDetails;
+    }
+
     public function saveDetails()
     {
         $clientResponse = [];
@@ -63,6 +69,9 @@ class BankCard extends Component
                 );
 
                 $clientResponse = ['success' => true, 'message' => 'Account Number Linked successfully'];
+
+                unset($this->userBanks);
+                
             });
         } catch (\Exception $e) {
             $clientResponse = ['success' => false, 'message' => $e->getMessage()];

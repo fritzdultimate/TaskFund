@@ -15,6 +15,7 @@ use Livewire\Component;
 class Withdrawal extends Component
 {
     public array $availableAmounts = [];
+    public $userHasLinkedBankAccount;
 
     #[Validate('required', message:[
         'withdrawalAmount.required' => 'Please choose a withdrawal amount'
@@ -34,6 +35,7 @@ class Withdrawal extends Component
 
     public function mount(){
         $this->availableAmounts = [1500, 3000, 6000,18000, 60000, 150000, 400000, 1000000, 2500000, 5000000];        
+        $this->userHasLinkedBankAccount = $this->banks->isNotEmpty();
     }
 
     public function requestWithdrawal(){
@@ -56,6 +58,7 @@ class Withdrawal extends Component
 
     #[Computed]
     public function banks(){
+        // return collect([]);
         return User::active()->bankDetails;
     }
 
