@@ -56,7 +56,7 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             
-            ->darkMode(true, true)
+            // ->darkMode(true, true)
             // ->theme('dark')
             ->authGuard('admin');
     }
