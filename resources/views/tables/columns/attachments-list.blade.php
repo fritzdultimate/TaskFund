@@ -5,7 +5,7 @@
     <div class="flex w-full disabled:pointer-events-none justify-start text-start">
         <div class="fi-ta-image px-3 py-4">
             <div class="flex items-center gap-x-2.5">
-                <ul x-init="recordId = {{ $getRecord()->id }}" id="images-{{ $record->id }}" class="flex -space-x-2">
+                <ul x-init="recordId = {{ $record->id }}" id="images-{{ $record->id }}" class="flex -space-x-2">
                     @foreach ($attachments as $idx => $attachment)
                     <li>
                         <img 

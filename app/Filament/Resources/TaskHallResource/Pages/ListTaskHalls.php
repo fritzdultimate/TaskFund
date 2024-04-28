@@ -26,7 +26,11 @@ class ListTaskHalls extends ListRecords
         return [
             'Processing' => Tab::make()
             ->badge(TaskHall::query()->where('status', TaskStatus::PROCESSING)->count())
-            ->badgeColor('success'),
+            ->badgeColor('success')
+            ->modifyQueryUsing(function(Builder $query) {
+                // redirect(ApprovedDepositsResource::getUrl());
+                return $query->where('status', TaskStatus::PROCESSING);
+            }),
             'Pending' => Tab::make()
                 ->badge(TaskHall::query()->where('status', TaskStatus::PENDING)->count())
                 ->badgeColor('success')

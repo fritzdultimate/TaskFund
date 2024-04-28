@@ -28,9 +28,9 @@ class TaskHallResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    public static function getEloquentQuery(): Builder {
-        return parent::getEloquentQuery()->where('status', TaskStatus::PROCESSING);
-    }
+    // public static function getEloquentQuery(): Builder {
+        // return parent::getEloquentQuery()->where('status', TaskStatus::PROCESSING);
+    // }
 
     public static function form(Form $form): Form
     {
