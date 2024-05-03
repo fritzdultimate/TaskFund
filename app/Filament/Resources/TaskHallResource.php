@@ -6,10 +6,15 @@ use App\Enums\TaskStatus;
 use App\Filament\Resources\TaskHallResource\Pages;
 use App\Filament\Resources\TaskHallResource\RelationManagers;
 use App\Models\TaskHall;
+use App\Services\TaskService;
+use App\Traits\RecordUtils;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\ActionSize;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ViewColumn;
@@ -21,6 +26,8 @@ use Illuminate\Support\HtmlString;
 
 class TaskHallResource extends Resource
 {
+    use RecordUtils;
+
     protected static ?string $model = TaskHall::class;
 
     protected static ?string $navigationLabel = 'Submitted Tasks';
@@ -38,6 +45,20 @@ class TaskHallResource extends Resource
             ->schema([
                 //
             ]);
+    }
+
+    public static function handleTaskAction ($record, $action) { 
+        $taskService = new TaskService;
+
+        $response = match($action) {
+            'approve' => $taskService->approveTask($record->id),
+            'decline' => $taskService->declineTask($record->id),
+            'process' => $taskService->processTask($record->id),
+            'delete' => $taskService->deleteTask($record->id),
+        };
+
+        static::showResponse($response);
+        return null;
     }
 
     public static function table(Table $table): Table
@@ -69,6 +90,40 @@ class TaskHallResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                ActionGroup::make([
+                    ActionGroup::make([
+                        Action::make('Approve Submission')
+                            ->action(fn(TaskHall $record) => 
+                                static::handleTaskAction($record, 'approve')
+                            )
+                            ->color('success')
+                            // ->label('')
+                            ->requiresConfirmation()
+                            ->visible(fn() => self::shouldBeVisibleInTab(['processing']))
+                        ,
+                        Action::make('Decline Submission')
+                            ->action(fn(TaskHall $record) => 
+                                // static::declineTask($record)
+                                static::handleTaskAction($record, action:'decline')
+                            )
+                            ->color('warning')
+                            ->requiresConfirmation()
+                            ->visible(fn() => self::shouldBeVisibleInTab(['processing']))
+                            ,
+                       
+                    ])->dropdown(false),
+                    Action::make('Delete Task')
+                        ->action(fn(TaskHall $record) => 
+                            self::handleTaskAction($record, 'delete')
+                        )
+                        ->color('danger')
+                        ->requiresConfirmation()
+                ])
+                ->label('actions')
+                ->icon('heroicon-m-ellipsis-vertical')
+                ->size(ActionSize::Small)
+                ->color('primary')
+                ->button('primary'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

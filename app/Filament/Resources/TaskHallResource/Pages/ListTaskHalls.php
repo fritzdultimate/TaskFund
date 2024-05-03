@@ -25,33 +25,38 @@ class ListTaskHalls extends ListRecords
     {
         return [
             'Processing' => Tab::make()
-            ->badge(TaskHall::query()->where('status', TaskStatus::PROCESSING)->count())
-            ->badgeColor('success')
-            ->modifyQueryUsing(function(Builder $query) {
-                // redirect(ApprovedDepositsResource::getUrl());
-                return $query->where('status', TaskStatus::PROCESSING);
-            }),
+                ->badge(TaskHall::query()->where('status', TaskStatus::PROCESSING)->count())
+                ->badgeColor('success')
+                ->modifyQueryUsing(function (Builder $query) {
+                    // redirect(ApprovedDepositsResource::getUrl());
+                    return $query->where('status', TaskStatus::PROCESSING);
+                }),
             'Pending' => Tab::make()
                 ->badge(TaskHall::query()->where('status', TaskStatus::PENDING)->count())
                 ->badgeColor('success')
-                ->modifyQueryUsing(function(Builder $query) {
+                ->modifyQueryUsing(function (Builder $query) {
                     // redirect(ApprovedDepositsResource::getUrl());
                     return $query->where('status', TaskStatus::PENDING);
                 }),
             'Completed' => Tab::make()
-            ->badge(TaskHall::query()->where('status', TaskStatus::COMPLETED)->count())
-            ->badgeColor('success')
-                ->modifyQueryUsing(function(Builder $query) {
+                ->badge(TaskHall::query()->where('status', TaskStatus::COMPLETED)->count())
+                ->badgeColor('success')
+                ->modifyQueryUsing(function (Builder $query) {
                     // redirect(DeclinedDepositsResource::getUrl());
                     return $query->where('status', TaskStatus::COMPLETED);
                 }),
             'Declined' => Tab::make()
                 ->badge(TaskHall::query()->where('status', TaskStatus::DECLINED)->count())
                 ->badgeColor('success')
-                ->modifyQueryUsing(function(Builder $query) {
+                ->modifyQueryUsing(function (Builder $query) {
                     // redirect(DeclinedDepositsResource::getUrl());
                     return $query->where('status', TaskStatus::DECLINED);
                 }),
         ];
+    }
+
+    public function getDefaultActiveTab(): string | int | null
+    {
+        return 'Processing';
     }
 }
