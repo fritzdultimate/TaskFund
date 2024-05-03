@@ -12,6 +12,13 @@ class ReferralLevelSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $tasks = config('referral_levels');
+
+        Task::factory(count($tasks))
+            ->youtube()
+            ->state(function () use (&$tasks) {
+                return array_shift($tasks) ?? [];
+            })
+            ->create();
     }
 }
