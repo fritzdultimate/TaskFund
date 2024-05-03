@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('referral_levels', function (Blueprint $table) {
             $table->id();
+            $table->tinyInteger('depth');
+            $table->decimal('referral_commission');
             $table->timestamps();
         });
     }
