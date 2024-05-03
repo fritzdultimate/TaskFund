@@ -12,8 +12,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('referrals', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            Schema::create('referrals', function (Blueprint $table) {
+                $table->id();
+                $table->foreignId('user_id')
+                    ->constrained('users')
+                    ->cascadeOnDelete()
+                    ->cascadeOnUpdate();
+                $table->foreignId('referred_user_id')
+                    ->constrained('users')
+                    ->cascadeOnDelete()
+                    ->cascadeOnUpdate();
+                $table->enum('level', ReferralLevels::values());
+                $table->timestamps();
+            });
         });
     }
 
