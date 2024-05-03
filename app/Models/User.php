@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -89,5 +90,23 @@ class User extends Authenticatable
 
     public function bankDetail(): HasOne {
         return $this->hasOne(BankDetail::class, );
+    }
+
+    public function referrals(): HasMany {
+        return $this->hasMany(Referral::class, 'user_id');
+    }
+
+    public function referee(): HasOne {
+        return $this->hasOne(Referral::class, 'referred_user_id');
+    }
+
+    public function getReferralLinkAttribute(){
+        return Str::wrap("/register/", request()->getSchemeAndHttpHost(), $this->username);
+    }
+
+    public function getReferralTurnoverAttribute(){
+        $referralIds = $this->referrals()->pluck('referred_user_id');
+
+        return User::whereIn('id', $referralIds)->sum('total_earned');            
     }
 }

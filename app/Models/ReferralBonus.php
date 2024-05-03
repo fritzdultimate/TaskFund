@@ -12,6 +12,8 @@ class ReferralBonus extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function earning(): MorphOne {
         return $this->morphOne(Earning::class, 'earnable');
     }
