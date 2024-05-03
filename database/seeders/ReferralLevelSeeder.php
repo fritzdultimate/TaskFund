@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ReferralLevel;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,12 +13,11 @@ class ReferralLevelSeeder extends Seeder
      */
     public function run(): void
     {
-        $tasks = config('referral_levels');
+        $referralLevels = config('referral-levels');
 
-        Task::factory(count($tasks))
-            ->youtube()
-            ->state(function () use (&$tasks) {
-                return array_shift($tasks) ?? [];
+        ReferralLevel::factory(count($referralLevels))
+            ->state(function () use (&$referralLevels) {
+                return array_shift($referralLevels) ?? [];
             })
             ->create();
     }

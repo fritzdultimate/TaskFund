@@ -18,6 +18,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    const REFERRAL_LEVEL_LIMIT = 3;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -78,6 +80,14 @@ class User extends Authenticatable
 
     public function taskHalls(): HasMany {
         return $this->hasMany(TaskHall::class);
+    }
+
+    public function taskEarnings(): HasMany {
+        return $this->hasMany(TaskEarning::class);
+    }
+
+    public function referralBonuses(): HasMany {
+        return $this->hasMany(ReferralBonus::class);
     }
 
     public function level(): BelongsTo {

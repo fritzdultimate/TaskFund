@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('withdrawals', function (Blueprint $table) {
             // $table->string('fund_password')->nullable()->change();
             // $table->foreignId('bank_detail_id')->constrained('bank_details')->cascadeOnDelete();
-            $table->dropColumn('bank_details_id');
+            // $table->dropColumn('bank_details_id');
         });
     }
 
