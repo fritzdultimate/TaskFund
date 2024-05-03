@@ -1,5 +1,5 @@
 <div class="bg-slate-100 h-full w-full" x-data="home">
-   <div>
+   <div wire:ignore>
     <div class="swiper">
         <div class="swiper-wrapper home-swiper">
             <div class="swiper-slide">
@@ -88,7 +88,7 @@
         </div>
     </div>
 
-    <div class="flex flex-col">
+    <div class="flex flex-col bg-inherit">
         <h3 class="text-base text-slate-800 mx-3 font-semibold my-3">Task Room</h3>
         <div class="flex mx-3 flex-col">
             <div class="w-full justify-between mb-3 grid grid-cols-2 gap-4">
@@ -140,6 +140,8 @@
     Alpine.data('home', () => ({
         init(){
             this.$nextTick(() => {
+                document.querySelector('.home-swiper').classList.remove('home-swiper');
+               
                 const progressCircle = document.querySelector(".autoplay-progress svg");
                 const progressContent = document.querySelector(".autoplay-progress span");
 
@@ -151,13 +153,13 @@
                     },
                     on: {
                         autoplayTimeLeft(s, time, progress) {
-                        progressCircle.style.setProperty("--progress", 1 - progress);
-                        progressContent.textContent = `${Math.ceil(time / 1000)}s`;
+                            console.log(time, s, progress);
+                            progressCircle.style.setProperty("--progress", 1 - progress);
+                            progressContent.textContent = `${Math.ceil(time / 1000)}s`;
                         }
                     }
                 });
 
-                document.querySelector('.home-swiper').classList.remove('home-swiper');
                 
                 $('#referrals').marquee({
                     delay: 4000,

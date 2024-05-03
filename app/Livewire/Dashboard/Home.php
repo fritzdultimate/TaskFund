@@ -16,16 +16,14 @@ use Livewire\Attributes\Computed;
 class Home extends Component
 {
 
-    public $completedTasks = [];
-    public $referrals = [];
+    
 
 
     public function boot()
     {
         // session()->forget(['completed-tasks-yep', $key]);
 
-        $this->completedTasks = $this->getCompletedTasks();
-        $this->referrals = $this->getReferrals();
+       
 
         // dd($this->completedTasks, $this->referrals);
     }
@@ -112,7 +110,16 @@ class Home extends Component
 
     public function render()
     {
+        $completedTasks = [];
+        $referrals = [];
+
+        $completedTasks = $this->getCompletedTasks();
+        $referrals = $this->getReferrals();
+
         // $this->authorize();
-        return view('livewire.dashboard.home');
+        return view('livewire.dashboard.home', [
+            'completedTasks' => $completedTasks,
+            'referrals' => $referrals,
+        ]);
     }
 }

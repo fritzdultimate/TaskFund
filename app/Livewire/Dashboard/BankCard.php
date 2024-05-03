@@ -55,18 +55,15 @@ class BankCard extends Component
                     throw new \Exception($response['message']);
                 }
 
-                User::active()->bankDetail()->updateOrCreate(
-                    [
-                        'user_id' => auth()->id(),
-                    ],
-                    [
+                User::active()
+                    ->bankDetail()
+                    ->create([
                         'bank_name' => $bank['name'],
                         'account_number' => $this->accountNumber,
                         'currency' => $bank['currency'],
                         'recipient_code' => $response['data']['recipient_code'],
                         'recipient_id' => $response['data']['id'],
-                    ]
-                );
+                    ]);
 
                 $clientResponse = ['success' => true, 'message' => 'Account Number Linked successfully'];
 
