@@ -85,7 +85,6 @@ Route::middleware(['auth'])->group(function(){
 
     Route::get('/app/info/fund-password', FundPassword::class)->name('fund-password');
 
-
 });
 
 
