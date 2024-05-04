@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('task_referral_commissions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('task_hall_id')->constrained('task_halls')->cascadeOnDelete();
+            $table->foreignId('referral_level_id')->constrained('referrals')->cascadeOnDelete();
+            $table->decimal('amount', 20);
             $table->timestamps();
         });
     }

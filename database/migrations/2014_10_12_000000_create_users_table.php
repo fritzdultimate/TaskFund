@@ -25,6 +25,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->decimal('balance', 20)->default(0.00);
             $table->decimal('total_earning', 20)->default(0.00);
+            $table->decimal('referral_bonus', 20)->default(0.00);
             $table->decimal('total_withdrawal', 20)->default(0.00);
             $table->string('password');
             $table->string('fund_password')->nullable();

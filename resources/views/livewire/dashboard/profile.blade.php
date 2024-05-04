@@ -30,7 +30,7 @@
                 Today's Profit
             </span>
             <span class="text-[16px] font-medium">
-                525
+                {{ $todayProfits }}
             </span>
         </div>
    
@@ -39,7 +39,7 @@
                 Yesterday's Profit
             </span>
             <span class="text-[16px] font-medium">
-                525
+                {{ $yesterdayProfits }}
             </span>
         </div>
    
@@ -48,7 +48,7 @@
                 This week's Profit
             </span>
             <span class="text-[16px] font-medium">
-                525
+                {{ $thisWeekProfits }}
             </span>
         </div>
     
@@ -57,7 +57,7 @@
                 This month's Profit
             </span>
             <span class="text-[16px] font-medium">
-                525
+                {{ $thisMonthProfits }}
             </span>
         </div>
    
@@ -66,7 +66,7 @@
                 Total revenue
             </span>
             <span class="text-[16px] font-medium">
-                525
+                {{ $totalRevenue }}
             </span>
         </div>
    
@@ -75,7 +75,7 @@
                 Referral's Bonus
             </span>
             <span class="text-[16px] font-medium">
-                525
+                {{ $referralBonus }}
             </span>
         </div>
     </div>

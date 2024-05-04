@@ -10,6 +10,8 @@ class TaskEarning extends Model
 {
     use HasFactory;
 
+    protected $guarded  = [];
+
     public function earnings(): MorphMany {
         return $this->morphMany(Earning::class, 'earnable');
     }

@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\DB;
 class TaskService
 {
 
-    private function distributeReferralCommision($investment, $interest)
+    private function distributeReferralCommision($taskHall, $amount)
     {
-        $referrer = User::where('username', $investment->user->referrer_username)->first();
+        $referrer = User::where('username', $taskHall->user->referrer_username)->first();
 
         if (!$referrer) return;
 
@@ -24,13 +24,20 @@ class TaskService
             $referrallevel = ReferralLevel::where('depth', $depth)->first();
 
 
-            $commission = ($referrallevel->referral_commission / 100) * $interest;
+            $commission = ($referrallevel->referral_commission / 100) * $amount;
 
             $referrer->increment('total_earning', $commission);
 
-            $referrer->
+            $taskCommision = $referrer->taskReferralCommissions()->create([
+                'task_hall_id' => $taskHall->id,
+                'referral_level_id' => $referrallevel->id,
+                'amount' => $commission
+            ]);
           
-            $referralTaskBonus = 
+            $taskCommision->earning()->create([
+                'user_id' => $referrer->id,
+                'amount' => $commission
+            ]);
 
 
             $referrer = User::where('username', $referrer->referrer_username)->first();
@@ -42,7 +49,7 @@ class TaskService
     }
 
     function approveTask($taskHallId){
-        DB::beginTransaction();  
+        // DB::beginTransaction();  
 
         $taskHall = TaskHall::with(['user.level', 'task'])->find($taskHallId);
 
@@ -50,12 +57,31 @@ class TaskService
             'success' => false,
             'message' => 'Task Not Found'
         ];
+        
+        $profit_per_task = $taskHall->user->level->profit_per_task;
 
+        
+        $taskHall->user->increment('total_earning', $profit_per_task);
+
+        $taskEarning = $taskHall->user->taskEarnings()->create([
+            'user_id' => $taskHall->user->id,
+            'task_hall_id' => $taskHall->id,
+            'amount' => $profit_per_task
+        ]);
+
+        $taskEarning->earnings()->create([
+            'user_id' => $taskHall->user->id,
+            'amount' => $profit_per_task
+        ]);
+        
+        $this->distributeReferralCommision($taskHall, $profit_per_task);
+        
         $taskHall->update(['status' => TaskStatus::COMPLETED]);
 
-        $taskHall->user->increment('total_earning', $taskHall->user->level->profit_per_task);
-
-
+        return [
+            'success' => true,
+            'message' => 'Task Approved successfully'
+        ];
     }
 
     function declineTask($taskHallId){

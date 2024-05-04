@@ -77,7 +77,6 @@ class User extends Authenticatable
         return $this->hasMany(Earning::class);
     }
 
-
     public function taskHalls(): HasMany {
         return $this->hasMany(TaskHall::class);
     }
@@ -88,6 +87,10 @@ class User extends Authenticatable
 
     public function referralBonuses(): HasMany {
         return $this->hasMany(ReferralBonus::class);
+    }
+
+    public function taskReferralCommissions(): HasMany {
+        return $this->hasMany(TaskReferralCommission::class);
     }
 
     public function level(): BelongsTo {

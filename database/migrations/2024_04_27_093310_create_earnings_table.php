@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->integer('earnable_id');
             $table->string('earnable_type');
+            $table->string('amount')->default(0.00);
             $table->timestamps();
         });
     }
