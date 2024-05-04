@@ -27,6 +27,7 @@ class TaskService
             $commission = ($referrallevel->referral_commission / 100) * $amount;
 
             $referrer->increment('total_earning', $commission);
+            $referrer->increment('task_referral_commission', $commission);
 
             $taskCommision = $referrer->taskReferralCommissions()->create([
                 'task_hall_id' => $taskHall->id,

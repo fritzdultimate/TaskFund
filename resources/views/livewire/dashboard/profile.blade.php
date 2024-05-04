@@ -24,7 +24,7 @@
         </a>
     </div>
 
-    <div class="grid grid-cols-2 gap-4 px-4">
+    <div class="grid grid-cols-2 gap-4 px-4 pb-10 bg-inherit">
         <div class="bg-[#FFFFFF] flex flex-col items-center justify-center rounded-[8px] gap-[10px] p-[8px]">
             <span class="text-[14px] font-poppins font-normal">
                 Today's Profit

@@ -27,6 +27,7 @@ use App\Livewire\Dashboard\TaskRecords;
 use App\Livewire\Dashboard\TaskRoom;
 use App\Livewire\Dashboard\Tasks;
 use App\Livewire\Dashboard\TeamReports;
+use App\Livewire\Dashboard\Teams;
 use App\Livewire\Dashboard\Wallet;
 use App\Livewire\Dashboard\Withdrawal;
 use Illuminate\Support\Facades\Route;
@@ -73,6 +74,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/app/task-records', TaskRecords::class)->name('task-records');
     Route::get('/app/daily-statement', DailyStatement::class)->name('daily-statement');
     Route::get('/app/team-reports', TeamReports::class)->name('team-reports');
+    Route::get('/app/teams', Teams::class)->name('teams');
     Route::get('/app/invite-friends', InviteFriends::class)->name('invite-friends');
     Route::get('/app/piggy-money', PiggyMoney::class)->name('piggy-money');
     Route::get('/app/accounting-records', AccountingRecords::class)->name('accounting-records');

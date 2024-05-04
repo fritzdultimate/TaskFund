@@ -35,6 +35,9 @@ class ProcessDepositController extends Controller
             // ]);
     
             $user->increment('balance', $deposit->amount);
+            $user->increment('total_deposited', $deposit->amount);
+
+            // total_recharged
 
             session()->flash('success');
             $success = true;
