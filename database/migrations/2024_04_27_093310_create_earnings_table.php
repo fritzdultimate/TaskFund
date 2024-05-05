@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\EarningTypes;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,6 +17,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->integer('earnable_id');
             $table->string('earnable_type');
+            $table->enum('type', EarningTypes::values())->nullable();
             $table->string('amount')->default(0.00);
             $table->timestamps();
         });

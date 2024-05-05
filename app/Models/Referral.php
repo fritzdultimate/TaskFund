@@ -12,6 +12,10 @@ class Referral extends Model
 
     protected $guarded = [];
 
+    public function scopeActive(){
+        return $this->where('user_id', auth()->id());
+    }
+
     public function referred(): BelongsTo {
         return $this->belongsTo(User::class, 'referred_user_id');
     }

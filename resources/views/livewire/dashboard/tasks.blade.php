@@ -1,5 +1,5 @@
 
-    <div x-data="task" class="flex flex-col w-full min-h-full pb-[100px] font-poppins bg-slate-100">
+    <div key x-data="task" class="flex flex-col w-full min-h-full pb-[100px] font-poppins bg-slate-100">
         <x-dashboard.header
             title="Task Hall"
         >

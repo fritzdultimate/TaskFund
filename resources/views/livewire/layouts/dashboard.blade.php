@@ -34,6 +34,7 @@
         <!-- STYLES -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
         @livewireStyles
+        @filamentStyles
 
         @vite(['resources/css/app.css', 'resources/css/font.css', 'resources/js/app.js'])
         {{-- <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/unicons.css" /> --}}
@@ -42,6 +43,7 @@
 
         <!-- JAVASCRIPTS -->
         @livewireScripts
+        @filamentScripts
     </head>
     <body class="h-full">
         {{ $slot }}

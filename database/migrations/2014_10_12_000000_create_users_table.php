@@ -29,6 +29,7 @@ return new class extends Migration
             $table->decimal('referral_bonus', 20)->default(0.00);
             $table->string('task_referral_commission')->default(0.00);
             $table->decimal('total_withdrawal', 20)->default(0.00);
+            $table->string('total_rebates')->default(0.00);
             $table->string('password');
             $table->string('fund_password')->nullable();
             $table->rememberToken();

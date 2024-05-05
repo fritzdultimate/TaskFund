@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\EarningTypes;
 use App\Enums\TaskStatus;
 use App\Models\ReferralLevel;
 use App\Models\TaskHall;
@@ -37,7 +38,8 @@ class TaskService
           
             $taskCommision->earning()->create([
                 'user_id' => $referrer->id,
-                'amount' => $commission
+                'amount' => $commission,
+                'type' => EarningTypes::COMMISSION
             ]);
 
 
@@ -70,9 +72,10 @@ class TaskService
             'amount' => $profit_per_task
         ]);
 
-        $taskEarning->earnings()->create([
+        $taskEarning->earning()->create([
             'user_id' => $taskHall->user->id,
-            'amount' => $profit_per_task
+            'amount' => $profit_per_task,
+            'type' => EarningTypes::TASK_EARNING
         ]);
         
         $this->distributeReferralCommision($taskHall, $profit_per_task);
