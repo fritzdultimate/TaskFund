@@ -34,20 +34,23 @@
         <!-- STYLES -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
         @livewireStyles
+        @filamentStyles
 
-        @vite('resources/css/app.css')
+        @vite(['resources/css/app.css', 'resources/css/font.css', 'resources/js/app.js'])
         {{-- <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/unicons.css" /> --}}
         <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
         @stack('styles-top')
 
         <!-- JAVASCRIPTS -->
         @livewireScripts
+        @filamentScripts
     </head>
     <body class="h-full">
         {{ $slot }}
 
-        @include('livewire.partials.footer')
+        {{-- @include('livewire.partials.footer') --}}
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <script src="{{ asset('libs/notiflix-aio-2.7.0.min.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         @stack('script-bottom')

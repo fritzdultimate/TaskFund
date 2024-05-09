@@ -18,6 +18,7 @@ return new class extends Migration
             $table->decimal('welcome_bonus', 20);
             $table->tinyInteger('daily_tasks');
             $table->decimal('profit_per_task');
+            $table->decimal('referral_bonus', 20)->default(0.00);
             $table->boolean('is_automated')->default(false);
             $table->timestamps();
         });
@@ -28,6 +29,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('levels');
     }
 };

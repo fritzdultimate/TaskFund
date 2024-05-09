@@ -13,16 +13,25 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('level_id')->nullable()->constrained('levels')->cascadeOnDelete();
+            $table->foreignId('level_id')
+                ->nullable()
+                ->constrained('levels')
+                ->cascadeOnDelete();
             $table->string('username');
             $table->string('firstname');
             $table->string('lastname');
+            $table->string('legal_name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->decimal('balance', 20)->default(0.00);
+            $table->decimal('total_deposited', 20)->default(0.00);
             $table->decimal('total_earning', 20)->default(0.00);
+            $table->decimal('referral_bonus', 20)->default(0.00);
+            $table->string('task_referral_commission')->default(0.00);
             $table->decimal('total_withdrawal', 20)->default(0.00);
+            $table->string('total_rebates')->default(0.00);
             $table->string('password');
+            $table->string('fund_password')->nullable();
             $table->rememberToken();
             $table->enum('gender', ['male', 'female', 'other'])->default('male');
             $table->timestamp('date_of_birth')->nullable();
@@ -34,7 +43,6 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->boolean('toured')->default(0);
-
         });
     }
 

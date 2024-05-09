@@ -14,7 +14,9 @@ return new class extends Migration
     {
         Schema::create('withdrawals', function (Blueprint $table) {
             $table->id();
+            $table->string('reference')->nullable();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('bank_detail_id')->constrained('bank_details')->cascadeOnDelete();
             $table->decimal('amount', 20);
             $table->enum('status', TransactionStatus::values())->default(TransactionStatus::PENDING);
             $table->timestamps();
@@ -26,6 +28,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('withdrawals');
     }
 };
